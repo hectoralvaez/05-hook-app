@@ -61,6 +61,135 @@ En terminal: `yarn add --dev @testing-library/react @types/jest jest-environment
 
 <br />
 
+# 🪝 115. useState
+
+useState es el hook más sencillo.  
+
+## useState con un valor:
+
+Podemos inicializar useState el con un valor:  
+```javascript
+const [counter, setCounter] = useState(10)
+```
+
+Al que luego hacemos referencia de la siguiente manera:  
+```javascript
+{ counter }
+```
+
+Y que podemos manipular así:  
+```javascript
+onClick={ () => setCounter( counter + 1 ) }
+```
+
+
+Dicho esto, podemos inicializar useState con:
+- **valor primitivo** (el ejemplo anterior)
+- **array**
+- **objecto**, 
+- **la instancia de una clase**
+- o lo que necesite el state...
+
+
+## useState con un objeto:
+```javascript
+const [counter, setCounter] = useState({
+    counter1: 10,
+    counter2: 20,
+    counter3: 30,
+})
+```
+
+Al que luego hacemos referencia de la siguiente manera:  
+```javascript
+{ counter.counter1 }
+```
+
+NO LO PODEMOS MANIPULAR ASÍ, ya que es un objeto y cambia el state de todos los valores del objeto:  
+```javascript
+onClick={ () => setCounter( counter.counter1 + 1 ) }
+```
+
+## useState con un objeto DESESTRUCTURADO:
+```javascript
+const [{counter1, counter2, counter3}, setCounter] = useState({
+    counter1: 10,
+    counter2: 20,
+    counter3: 30,
+})
+```
+
+Al que luego hacemos referencia de la siguiente manera:  
+```javascript
+{ counter1 }
+```
+
+NO LO PODEMOS MANIPULAR ASÍ, ya que es un objeto y cambia el state de todos los valores del objeto:  
+```javascript
+onClick={ () => setCounter( counter1 + 1 ) }
+```
+
+
+Para manipular el objeto con useState, hay que preservar los valores anteriores.  
+Al llamar a `setCounter`, lo que estamos haciendo es establecer el nuevo valor del state.  
+
+```javascript
+onClick={ 
+    () => setCounter( {
+        counter1: counter1 + 1,
+        counter2: counter2,
+        counter3: counter3
+    } )
+}
+```
+
+Para simplificarlo:  
+VERSIÓN 1:  
+```javascript
+const [{ counter1, counter2, counter3 }, setCounter] = useState({
+    counter1: 10,
+    counter2: 20,
+    counter3: 30,
+})
+```
+
+Como el valor és el mismo, no hace falta volver a asignarle el valor
+```javascript
+onClick={ 
+    () => setCounter( {
+        counter1: counter1 + 1,
+        counter2, 
+        counter3,
+    } )
+}
+```
+
+VERSIÓN 2:  
+Con `state` y desestructurando el propio `state` para facilitar el uso de "Spread Operator", ("esparcir" las propiedades), lo que nos permite copiar rápidamente todo o parte de una array u objeto existente en otra array u objeto.
+
+```javascript
+const [ state, setCounter] = useState({
+    counter1: 10,
+    counter2: 20,
+    counter3: 30,
+})
+
+const {counter1, counter2, counter3 } = state
+```
+
+Usamos `...` en "state" para recuperar el valor del resto de los valores del objeto y solo aplicamos el cambio al que queremos modificar.  
+```javascript
+onClick={ 
+    () => setCounter( {
+        ...state,
+        counter1: counter1 + 1,
+    } )
+}
+```
+
+
+<br />
+
 ---
 # 🪝 113. Temas puntuales de la sección
 
