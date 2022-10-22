@@ -57,7 +57,49 @@ En terminal: `yarn add --dev @testing-library/react @types/jest jest-environment
 >>El objeto `screen` de React Testing Library (RTL) proporciona métodos para consultar los elementos representados del DOM para hacer afirmaciones sobre su contenido de texto, atributos y más. [Queries](https://testing-library.com/docs/queries/about/)
 
 
+>> EXTRA INFO:  
+>> - Las dev tools de Chrome solo funcionan en desarollo, cuando estamos en producción, no funcionan.
+
+
 ---
+
+<br />
+
+# 🪝 117. Exponer métodos del Hook
+
+## PARA CREAR FUNCIONES DENTRO DE UN HOOK Y PODERLAS REUTILIZAR: 
+### Declarar la función dentro del hook (useCounter.js):
+
+```javascript
+const increment = () => {
+    setCounter( counter + 1);
+}
+```
+
+### Enviar la función desde el hook (useCounter.js):
+Pasar el resultado de la función al `return`:  
+```javascript
+return {
+    counter,
+    increment,
+}
+```
+(el `counter`ya se lo estábamos pasando)
+
+
+### Recibir la función en el component (CounterWithCustomHook.jsx):
+Desestructuramos el contenido que recibimos de `useCounter.js`, es necesario tener importado el hook `import { useCounter } from "../hooks/useCounter";`  
+```javascript
+const { counter, increment } = useCounter();
+```
+(el `counter`ya se lo estábamos recibiendo)
+
+### Usar la función en el component (CounterWithCustomHook.jsx):
+```javascript
+onClick={ increment }
+```
+---
+
 
 <br />
 
