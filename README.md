@@ -61,13 +61,13 @@ En terminal: `yarn add --dev @testing-library/react @types/jest jest-environment
 
 <br />
 
-# 🪝 115. useState
+# 🪝 115. useState [IMPORTANTE] ⭐
 
 useState es el hook más sencillo.  
 
 ## useState con un valor:
 
-Podemos inicializar useState el con un valor:  
+Podemos inicializar el useState con un valor:  
 ```javascript
 const [counter, setCounter] = useState(10)
 ```
@@ -129,6 +129,14 @@ NO LO PODEMOS MANIPULAR ASÍ, ya que es un objeto y cambia el state de todos los
 onClick={ () => setCounter( counter1 + 1 ) }
 ```
 
+Para ver el estado de los hooks, vamos a chrome, en la pestaña de React "Components" veremos que el estado del objeto al iniciar la aplicación es:  
+```javascript
+{counter1: 10, counter2: 20, counter3: 30}
+```
+
+Pero al hacer click en el botón el State pasa a ser `11`.  
+
+> NOTA: Nada impide cambiar un estado dentro de un useState (pasar de objeto a numérico), trabajando con typeScrript, podríamos obligar a que no cambie de estado.
 
 Para manipular el objeto con useState, hay que preservar los valores anteriores.  
 Al llamar a `setCounter`, lo que estamos haciendo es establecer el nuevo valor del state.  
