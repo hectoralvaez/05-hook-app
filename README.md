@@ -61,6 +61,41 @@ En terminal: `yarn add --dev @testing-library/react @types/jest jest-environment
 
 <br />
 
+# 🪝 116. useCounter - CustomHook
+
+La ventaja de crear un custom hook es que lo puedes reutilizar en toda la aplicación y no tener que repetir toda la lógica y "carpintería" para algo tan sencillo.  
+
+Nuestros hooks los añadimos en la carpeta `hooks` y es un estandar que empiecen con 'use', en este caso `useCounter.js`.   
+
+Un hook no es más que una simple función con un `return`que puede ser un objeto `return{}`, un array `return[]`, un boleano `return true`, puede ser lo que necesitemos que devuelva.  
+
+Dependiendo de lo que devuelva, a la hora de usarlo habrá que definirlo como objeto:  
+```javascript
+const {} = useCounter();
+```
+O como array:
+```javascript
+const [] = useCounter();
+```
+
+En nuestro caso, lo hacemos como objeto, ya que la desestructuración ya que nos permite desestructurar exactamente lo que necesitamos por nombre y además es la práctica más habitual.  
+
+Para aplicar la desestructuración al objeto:  
+```javascript
+const { counter } = useCounter();
+```
+
+Y poder usar el valor dentro del código:  
+```javascript
+{ counter } 
+```
+
+Normalmente los Customs Hooks están vinculado con hooks propios de React, en este caso el `useState`.
+
+---
+
+<br />
+
 # 🪝 115. useState [IMPORTANTE] ⭐
 
 useState es el hook más sencillo.  
