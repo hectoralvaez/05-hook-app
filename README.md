@@ -106,6 +106,47 @@ const decrement = () => {
     setCounter( counter - 1);
 }
 ```
+
+### Usar onClick con y sin argumentos:
+Cuando hacemos `onClick`, estamos pasando el *evento del click* como **primer argumento**.  
+
+#### VERSIÓN 1 SIN ARGUMENTO:
+Si la función no tienen ningún argumento:  
+```javascript
+const increment = () => {
+    setCounter( counter + 1);
+}
+```
+Se puede hacer la llamada a la función dentro del onClick sin ningún problema:
+```javascript
+onClick={ increment }
+```
+
+#### VERSIÓN 2 CON ARGUMENTO:
+La función dentro del onClick, en realidad lo que está haciendo es lo siguiente:
+```javascript
+onClick={ () => increment() }
+```
+
+
+Si la función tiene que recibir un argumento la declaramos así:  
+```javascript
+const increment = ( value = 1 ) => { // Si no se pasa el argumento "value", por defecto será "1"
+    setCounter( counter + value );
+}
+```
+
+Ahora sí podemos pasar el valor que va a incrementar:
+```javascript
+onClick={ () => increment(2) }
+```
+
+
+
+`[object Object]` es la representación `toString` de un objeto, es decir, deja de funcionar como `object` y pasa a ser un `string`
+
+
+
 ---
 
 
