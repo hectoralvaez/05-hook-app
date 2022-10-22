@@ -98,6 +98,14 @@ const { counter, increment } = useCounter();
 ```javascript
 onClick={ increment }
 ```
+
+Una forma sencilla de controlar que el contador no llegue a valores negativos.  
+```javascript
+const decrement = () => {
+    if ( counter === 0 ) return; // Aquí sale de la función.
+    setCounter( counter - 1);
+}
+```
 ---
 
 
