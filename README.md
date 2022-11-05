@@ -57,8 +57,155 @@ En terminal: `yarn add --dev @testing-library/react @types/jest jest-environment
 >>El objeto `screen` de React Testing Library (RTL) proporciona métodos para consultar los elementos representados del DOM para hacer afirmaciones sobre su contenido de texto, atributos y más. [Queries](https://testing-library.com/docs/queries/about/)
 
 
->> EXTRA INFO:  
->> - Las dev tools de Chrome solo funcionan en desarollo, cuando estamos en producción, no funcionan.
+> EXTRA INFO:  
+> - Las dev tools de Chrome solo funcionan en desarollo, cuando estamos en producción, no funcionan.
+
+> EXTRA INFO VISUAL STUDIO CODE:  
+> - Para crear un Functional Component `rafc`.
+
+
+---
+
+<br />
+
+# 🪝 118. [useEffect](https://es.reactjs.org/docs/hooks-effect.html) - SimpleForm
+
+useEffect es uno de los hooks más usados junto con useState.  
+
+Antes de empezar con `useEffect`, necesitamos mantener el "estado", es decir, mantener la información del formulario.  
+
+Hay más hooks que nos permiten mantener estados, pero hasta el momento, el que conocemos es `useState`.  
+
+```javascript
+const [formState, setFormState] = useState({
+    username: 'Héctor',
+    email: 'hector@gmail.com'
+});
+```
+
+Desestructuramos el `formState`:  
+```javascript
+const { username, email } = formState;
+```
+
+De esta manera ya podemos llamar al valor en los inputs `value={ email }`:
+```
+<input
+    type="email"
+    className="form-control mt-2"
+    placeholder="email@loquesea.com"
+    name="email"
+    value={ email }
+/>
+```
+
+Ahora ya podemos ver el valor asignado en los inputs, pero no se pueden cambiar porque React "trabaja en una sola vía", quiere decir que si se hace un cambio en el state, se tiene que volver a dibujar, es decir, llamar a una función que vuelva a pasar por el state.  
+
+Creamos una función que nos permita hacer cambios en los inputs:
+
+
+```javascript
+const onInputChange = ( event ) => {
+    console.log(event);
+}
+```
+
+```
+<input
+    type="email"
+    className="form-control mt-2"
+    placeholder="email@loquesea.com"
+    name="email"
+    value={ email }
+    onChange={ onInputChange }
+/>
+```
+
+
+### PROCESO DE OBTENCIÓN DE DATOS:
+
+Hacemos console log dentro de la función, de manera que cada vez que cambie el input tocando cualquier tecla, se dispare la función `onChange={ onInputChange }`  
+
+1 - `console.log(event)`
+Así recibimos toda la información vinculada al evento. 
+```javascript
+const onInputChange = ( event ) => {
+    console.log(event);
+}
+```
+Podemos ver TODA la información.  
+
+
+2 - `console.log(event.target)`
+```javascript
+const onInputChange = ( event ) => {
+    console.log(event.target);
+}
+```
+Con `event.target` recibimos el input completo en html.
+```
+<input type="email" class="form-control mt-2" placeholder="email@loquesea.com" name="email" value="hector@gmail.com">
+```
+
+
+3 - `console.log(event.target.value)`
+```javascript
+const onInputChange = ( event ) => {
+    console.log(event.target.value);
+}
+```
+Con `event.target.value` recibimos el valor del input con el cambio aplicado al valor inicial.
+```
+Héctor2
+```
+
+4 - `console.log(event.target.name)`
+```javascript
+const onInputChange = ( event ) => {
+    console.log(event.target.name);
+}
+```
+Con `event.target.name` recibimos el nombre del input que se está cambiando.
+```
+email
+```
+
+5 - Del `event`, desestructuramos el `target`
+```javascript
+const onInputChange = ({ target }) => {
+    const { name, value } = target;
+    console.log({ name, value });
+}
+```
+Recibimos el objeto con los dos valores indicados y m´s información del objeto:
+```
+{name: 'username', value: 'Héctor2'}.
+```
+
+Ahora ya tenemos la información que necesitamos (name, value) del input al que estamos aplicando cambios para poder aplicar el `setFormState`
+
+
+### ASIGNAR EL VALOR AL INPUT:
+
+En la función `onInputChange`, llamamos al `setFormState` para registrar el valor del input.  
+
+Antes de nada, desestructuramos el `formState`, ya que podría tener muchos otros valores que no queremos perder, para eso usamos Spread Operator `...formState,`  
+
+A continuación, usamos las "propiedades computadas el objeto" y hacemos referencia al "name" de la siguiente manera para asignarle el nuevo valor:  
+`[ name ]: value`
+
+Este es el resultado de la función
+
+```javascript
+const onInputChange = ({ target }) => {
+    const { name, value } = target;
+    setFormState({
+        ...formState,
+        [ name ]: value
+    });
+}
+```
+
 
 
 ---
@@ -187,7 +334,7 @@ Normalmente los Customs Hooks están vinculado con hooks propios de React, en es
 
 <br />
 
-# 🪝 115. useState [IMPORTANTE] ⭐
+# 🪝 115. [useState](https://es.reactjs.org/docs/hooks-state.html)  [IMPORTANTE] ⭐
 
 useState es el hook más sencillo.  
 
