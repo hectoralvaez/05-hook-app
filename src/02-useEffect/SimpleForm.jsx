@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useState } from "react";
 
 export const SimpleForm = () => {
@@ -16,6 +17,23 @@ export const SimpleForm = () => {
             [ name ]: value     // Propiedades computadas el objeto
         });
     }
+
+    // NO SE RECOMIENDA USAR useEffect SIN DEPENDENCIAS:
+    // useEffect( () => {
+    //     console.log('useEffect called!');
+    // });
+
+    useEffect( () => {
+        console.log('useEffect called!');
+    }, []);
+
+    useEffect( () => {
+        console.log('formState changed!');
+    }, [formState]);
+
+    useEffect( () => {
+        console.log('email changed!');
+    }, [email]);
 
     return (
         <>

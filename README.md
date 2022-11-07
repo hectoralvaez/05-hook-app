@@ -57,6 +57,9 @@ En terminal: `yarn add --dev @testing-library/react @types/jest jest-environment
 >>El objeto `screen` de React Testing Library (RTL) proporciona métodos para consultar los elementos representados del DOM para hacer afirmaciones sobre su contenido de texto, atributos y más. [Queries](https://testing-library.com/docs/queries/about/)
 
 
+> EXTRA INFO REACT:  
+>  - Para evitar que, por ejemplo, aparezca duplicado el console.log de la llamada al `useEffect`, eliminar el `<React.StrictMode>` del `main.jsx`.
+
 > EXTRA INFO:  
 > - Las dev tools de Chrome solo funcionan en desarollo, cuando estamos en producción, no funcionan.
 
@@ -64,6 +67,58 @@ En terminal: `yarn add --dev @testing-library/react @types/jest jest-environment
 > - Para crear un Functional Component `rafc`.
 
 
+---
+
+<br />
+
+# 🪝 119. Dependencias del useEffect
+
+`useEffect` está formado por dos argumentos:  
+El primero es el callback, es decir, la función que se va a disparar.  
+El segundo son las dependencias, que es un array en el cual marcamos las condiciones que van a hacer que se dispare el `useEffect`. 
+
+Si llamamos el `useEffect` sin dependencias (no se recomienda poner un `useEffect` sin dependencias) este se disparará cada vez que el componente es redibujado (al cargarse o al hacer cambios en cualquier elemento que lo forma).  
+
+Seguramente este no sea el comportamiento que queremos, ya que lo normal sería que el `useEffect` esté vinculado a una acción en concreto, no a todos los cambios del componente.  
+
+> React recomienda tener UN EFECTO POR CADA ACCIÓN que se quiera ejecutar, es decir, en lugar de tener un solo efecto que haga muchas acciones, es mejor tener EFECTOS ESPECÍFICOS por cada efecto secundario o acción que se quiera ejecutar.
+
+
+EJEMPLO [NO RECOMENDADO]: Se ejecuta SIEMPRE que se redibuja el componente, ya que no tiene dependencias.
+
+```javascript
+useEffect( () => {
+    console.log('useEffect called!');
+});
+```
+
+Si en las dependencias pasamos un array vacío, el `useEffect` solo se ejecutará la primera vez que se renderize el componente:
+
+```javascript
+useEffect( () => {
+    console.log('useEffect called!');
+}, []);
+```
+
+Si en las dependencias pasamos la referencia del formulario (`formState`) solo se ejecutará cuando haya cambios en el formulario (y la primera vez que se carga el componente):
+
+EJEMPLO: Se ejecuta SOLO si hay cambios en el FORM.
+
+```javascript
+useEffect( () => {
+    console.log('formState changed!');
+}, [formState]);
+```
+
+Si en las dependencias pasamos la referencia del email dentro del formulario (`email`) solo se ejecutará cuando haya cambios en el email (y la primera vez que se carga el componente):
+
+EJEMPLO: Se ejecuta SOLO si hay cambios en el EMAIL del formulario.
+
+```javascript
+useEffect( () => {
+    console.log('email changed!');
+}, [email]);
+```
 ---
 
 <br />
