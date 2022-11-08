@@ -71,6 +71,45 @@ En terminal: `yarn add --dev @testing-library/react @types/jest jest-environment
 
 <br />
 
+# 🪝 120. useEffect unmount - Cleanup
+
+Cuando llamamos el snippet del `useEffect` automáticamente genera 3 partes:
+
+Tenemos el callback, o función de retorno formado por el cuerpo `first` y el "cleanup" (limpieza) que sería el return con el contenido `second`. 
+
+A continuación encontramos la array con las dependencias `[third]`
+```javascript
+useEffect(() => {
+    first;
+
+    return () => {
+        second;
+    };
+}, [third]);
+```
+
+### Cleanup `second`
+Esta función la utilizaremos para limpiar, cancelar observables, cancelar algún tipo de subscripción o listener para evitar que siga consumiendo memoria. 
+
+
+Este `if` solo muestro el component <Message /> si el `username` es exactamente igual a "Héctor2".
+
+```javascript
+{
+    (username === 'Héctor2') && <Message />
+}
+```
+
+Simplemente con esto, ya desaparece por completo todo el componente, no hace falta el Cleanup para hacerlo desaparecer. En este ejemplo, no es muy útil el cleanup, de hecho, no está haciendo nada, solo el console.log para saber que el componente se ha desmontado.  
+
+Esto será útil cuando en el momento de desmontar un componente, tengamos que liberar espacio cancelando observables, algún tipo de subscripción o listener.
+
+
+
+---
+
+<br />
+
 # 🪝 119. Dependencias del useEffect
 
 `useEffect` está formado por dos argumentos:  
