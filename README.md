@@ -71,6 +71,55 @@ En terminal: `yarn add --dev @testing-library/react @types/jest jest-environment
 
 <br />
 
+# 🪝 122. useEffect - Precauciones
+
+En esta clase sí queda claro el uso de la limpieza (cleanup) en el `useEffect`
+
+
+Si no hacemos el cleanup, aunque desaparezca el componente, el listener sigue ahí. Además, por cada vez que el componente se genera, se está creando un nuevo listener (el ejemplo de crear muchas veces el componente, minuto 2:15) 
+
+Así controlamos el evento `mousemove`, pero a la que se active el useEffect al entrar al componente, SIEMPRE se disparará el "listener", es decir siempre printará en consola las coordenadas y por cada vez que vuelves a llamar al componente (en este caso, poniendo en el inout "Héctor2") el listener se activa una vez más.
+
+```javascript
+// De esta manera no podemos hacer referencia al espacio donde tenemos definida la función
+window.addEventListener( 'mousemove', (event) => {
+    console.log(event.x, event.y);
+})
+
+```
+
+Para poder hacer el `cleanup` tenemos que definir la referencia a la función, al ESPACIO EN MEMORIA donde está definida la función.   
+
+En nuestro caso la función definida es `onMouseMove`y ahora sí podemos hacer referencia con el `addEventListener` y en el return para el "cleanup" podemos desmontarla con `removeEventListener`
+
+```javascript
+const onMouseMove = ( {x, y} ) => {
+    const coords = { x, y };
+    console.log(coords);
+}
+window.addEventListener( 'mousemove', onMouseMove)
+```
+
+Ahora sí, en el `return` de la función, ya le podemos añadir el "cleanup":
+```javascript
+return () => {
+    window.removeEventListener( 'mousemove', onMouseMove)
+};
+```
+
+Es importante hacer el cleanup del componente ya que es un ERROR que se quiera acceder a el state de un componente que no existe. En versiones anteriores marcaba error o incluso llegaba a petar la aplicación, a partir de React 18, no da problemas, pero no se tiene que hacer.
+
+
+Para imprimir objetos, hay que utilizar el `JSON.stringify` ya que no se pueden imprimir directamente, habría que pasarlo a un string o extraerlo de forma independiente `coords.y`, por ejemplo 
+
+```javascript
+JSON.stringify(coords)
+```
+
+---
+
+<br />
+
 # 🪝 120. useEffect unmount - Cleanup
 
 Cuando llamamos el snippet del `useEffect` automáticamente genera 3 partes:
