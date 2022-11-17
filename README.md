@@ -35,6 +35,7 @@ En las instalaciones CRA ya viene instalada, con Vite hay que hacer la instalaci
 En terminal: `yarn add --dev @testing-library/react @types/jest jest-environment-jsdom`
 - [Vite](https://vitejs.dev/): La alternativa a [Create React App (CRA)](https://create-react-app.dev/), es más ligero
 - [Use Vite for React Apps instead of CRA](https://dev.to/nilanth/use-vite-for-react-apps-instead-of-cra-3pkg)
+- [React Hook Form](https://react-hook-form.com/): Librería que te ayuda a validar formularios en React. Es una librería mínima sin otras dependencias, a la vez que es eficiente y fácil de usar, lo que requiere que los desarrolladores escriban menos líneas de código que otras librerías de formularios.
 ---
 
 ## TESTS
