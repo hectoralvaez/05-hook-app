@@ -71,6 +71,49 @@ En terminal: `yarn add --dev @testing-library/react @types/jest jest-environment
 
 <br />
 
+# 🪝 124. Tarea - Implementar funcionalidad de Reset
+
+La idea es añadir un botón de "reset" al formulario que vacíe los campos, es decirl, lo vuelva al estado inicial.
+
+1 - En el form (FormWithCustomHooks.jsx) añadimos al botón el `onClick` que llame a la función. En este caso `onClick={ onResetForm }`
+
+```
+<button onClick={ onResetForm } className="btn btn-primary mt-2">Borrar</button>
+```
+
+2 - Creamos la función en el Hook (useForm.js)
+
+```javascript
+const onResetForm = () => {
+    setFormState( initialForm );
+}
+```
+
+3 - Exportamos la función en el Hook (useForm.js)
+
+```javascript
+return {
+    ...formState,       // Desestructuramos el formState (en este caso tiene el user, emai, pass) para que cree esas propiedades y las exponga
+    formState,          // El Valor del formulario
+    onInputChange,      // La función para cambiarlo
+    onResetForm,        // La función para resetear el formulario
+}
+```
+
+4 - En el form (FormWithCustomHooks.jsx) añadimos a la llamada al Hook `useForm` la función `onResetForm`
+
+```javascript
+const { formState, onInputChange, onResetForm, username, email, password } = useForm({
+    username: '',
+    email: '',
+    password: ''
+});
+```
+
+---
+
+<br />
+
 # 🪝 123. Formulario con custom Hook
 
 (Repasar todo el proceso en los commits)
