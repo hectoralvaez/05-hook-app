@@ -16,6 +16,12 @@ export const useForm = () => {
             [ name ]: value     // Propiedades computadas el objeto
         });
     }
-    
+
+    // En este return ponemos la información que necesitaremos extraer del formulario ("exponer al mundo exterior")
+    return {
+        formState,          // El Valor del formulario
+        onInputChange,      // La función para cambiarlo
+    }
+
 }
 
