@@ -5,6 +5,7 @@ GitHub Pages: https://hectoralvaez.github.io/festival-de-gifs/
 
 React, Vite, GitHub, Jest, React Testing Library, Netlify, GitHub Pages
 
+---
 
 ## ARRANCAR UN PROYECTO CON YARN + VITE:  
 En la carpeta donde vamos a instalar el proyecto:  
@@ -22,49 +23,47 @@ Para ejecutar la aplicación:
 `yarn dev`
 
 
+---
 
-> ### LINKS DE INTERÉS:  
-> [Documentación de React y recursos relacionados](https://es.reactjs.org/docs/getting-started.html)  
-
-> EXTRAS:  
-> 
-> - [GitHub](https://github.com/): Plataforma de alojamiento de código para el control de versiones y la colaboración.
-> - [Netlify](https://www.netlify.com/): Desplegar desplegar aplicaciones sin BackEnd.
-> - [Jest](https://jestjs.io/): Para hacer tests en Babel, TypeScript, Node, React, Angular, Vue y más. (combinada con [React Testing Library](https://testing-library.com/docs/))
-> - [React Testing Library (RTL)](https://testing-library.com/docs/react-testing-library/intro/): Librería para hacer tests en React (combinada con [Jest](https://jestjs.io/)).  
+### LINKS DE INTERÉS:  
+- [Documentación de React y recursos relacionados](https://es.reactjs.org/docs/getting-started.html)  
+- [GitHub](https://github.com/): Plataforma de alojamiento de código para el control de versiones y la colaboración.
+- [Netlify](https://www.netlify.com/): Desplegar desplegar aplicaciones sin BackEnd.
+- [Jest](https://jestjs.io/): Para hacer tests en Babel, TypeScript, Node, React, Angular, Vue y más. (combinada con [React Testing Library](https://testing-library.com/docs/))
+- [React Testing Library (RTL)](https://testing-library.com/docs/react-testing-library/intro/): Librería para hacer tests en React (combinada con [Jest](https://jestjs.io/)).  
 En las instalaciones CRA ya viene instalada, con Vite hay que hacer la instalación a parte.  
 En terminal: `yarn add --dev @testing-library/react @types/jest jest-environment-jsdom`
-> - [Vite](https://vitejs.dev/): La alternativa a [Create React App (CRA)](https://create-react-app.dev/), es más ligero
+- [Vite](https://vitejs.dev/): La alternativa a [Create React App (CRA)](https://create-react-app.dev/), es más ligero
+- [Use Vite for React Apps instead of CRA](https://dev.to/nilanth/use-vite-for-react-apps-instead-of-cra-3pkg)
+---
 
+## TESTS
+> NOTA:  
+> Siempre falta tiempo para hacer tests, por lo tanto, se recomienda, como mínimo, hacer el test de la ruta crítica, es decir, la parte principal de la app. Si fuera una tienda, la ruta crítica es el proceso de compra (añadir productos al carito, el cesto de la compra, etc...)  
 
-> MORE INFO:  
-> [Use Vite for React Apps instead of CRA](https://dev.to/nilanth/use-vite-for-react-apps-instead-of-cra-3pkg)
+### [Más info de tests AAA (Patrón AAA)](https://geeks.ms/jorge/2018/08/25/unit-testing-y-el-patron-aaa/)  
+1. Arrange (Organizar/Inicializa) => Inicializa los objetos y establece los valores de los datos que vamos a utilizar en el Test que lo contiene.
+2. Act (Actuar) => Realiza la llamada al método a probar con los parámetros preparados para tal fin.
+3. Assert (Confirmar/Comprobar) => Comprueba que el método de pruebas ejecutado se comporta tal y como teníamos previsto que lo hiciera.
 
-> ## TESTS
->> NOTA:  
->> Siempre falta tiempo para hacer tests, por lo tanto, se recomienda, como mínimo, hacer el test de la ruta crítica, es decir, la parte principal de la app. Si fuera una tienda, la ruta crítica es el proceso de compra (añadir productos al carito, el cesto de la compra, etc...)  
->
->> [Más info de tests AAA (Patrón AAA)](https://geeks.ms/jorge/2018/08/25/unit-testing-y-el-patron-aaa/)  
->> 1. Arrange (Organizar/Inicializa) => Inicializa los objetos y establece los valores de los datos que vamos a utilizar en el Test que lo contiene.
->> 2. Act (Actuar) => Realiza la llamada al método a probar con los parámetros preparados para tal fin.
->> 3. Assert (Confirmar/Comprobar) => Comprueba que el método de pruebas ejecutado se comporta tal y como teníamos previsto que lo hiciera.
->
->> EXTRA INFO JEST:
->> - [expect](https://jestjs.io/docs/expect)
->
->> EXTRA INFO REACT TESTING LIBRARY (RTL):  
->> `screen`  
->>El objeto `screen` de React Testing Library (RTL) proporciona métodos para consultar los elementos representados del DOM para hacer afirmaciones sobre su contenido de texto, atributos y más. [Queries](https://testing-library.com/docs/queries/about/)
+### JEST:
+[expect](https://jestjs.io/docs/expect)
 
+### REACT TESTING LIBRARY (RTL):  
 
-> EXTRA INFO REACT:  
->  - Para evitar que, por ejemplo, aparezca duplicado el console.log de la llamada al `useEffect`, eliminar el `<React.StrictMode>` del `main.jsx`.
+`screen`  
+El objeto `screen` de React Testing Library (RTL) proporciona métodos para consultar los elementos representados del DOM para hacer afirmaciones sobre su contenido de texto, atributos y más. [Queries](https://testing-library.com/docs/queries/about/)
 
-> EXTRA INFO:  
-> - Las dev tools de Chrome solo funcionan en desarollo, cuando estamos en producción, no funcionan.
+---
 
-> EXTRA INFO VISUAL STUDIO CODE:  
-> - Para crear un Functional Component `rafc`.
+## EXTRA INFO
+### REACT:  
+- Para evitar que, por ejemplo, aparezca duplicado el console.log de la llamada al `useEffect`, eliminar el `<React.StrictMode>` del `main.jsx`.
+
+### GENERIC:  
+- Las dev tools de Chrome solo funcionan en desarollo, cuando estamos en producción, no funcionan.
+### VISUAL STUDIO CODE:  
+- Para crear un Functional Component `rafc`.
 
 
 ---
