@@ -1,14 +1,9 @@
+import { useState } from "react";
 
-export const useForm = () => {
+export const useForm = ( initialForm = {} ) => {
 
-    const [formState, setFormState] = useState({
-        username: '',
-        email: '',
-        password: ''
-    });
-
-    const { username, email, password } = formState;
-
+    const [formState, setFormState] = useState( initialForm );  // De esta manera el formState será lo que se le pase al Hook como argumento, 
+                                                                // con los campos que sean, no solo los que teníamos hasta ahora (user, email, pass)
     const onInputChange = ({ target }) => {
         const { name, value } = target;
         setFormState({
