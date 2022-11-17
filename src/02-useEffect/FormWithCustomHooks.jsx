@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { Message } from "./Message";
 
-export const SimpleForm = () => {
+export const FormWithCustomHooks = () => {
     
     const [formState, setFormState] = useState({
         username: 'Héctor',
@@ -38,7 +38,7 @@ export const SimpleForm = () => {
 
     return (
         <>
-            <h1>Formulario Simple</h1>
+            <h1>Formulario con custom Hook</h1>
             <hr />
             <input
                 type="text"
