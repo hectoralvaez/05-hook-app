@@ -3,13 +3,12 @@ import { useForm } from "../hooks/useForm";
 
 export const FormWithCustomHooks = () => {
 
-    const { formState, onInputChange } = useForm({
+    const { formState, onInputChange, username, email, password } = useForm({
         username: '',
         email: '',
         password: ''
     });
 
-    const { username, email, password } = formState;
     
     // NO SE RECOMIENDA USAR useEffect SIN DEPENDENCIAS:
     // useEffect( () => {

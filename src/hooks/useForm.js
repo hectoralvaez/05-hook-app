@@ -14,6 +14,7 @@ export const useForm = ( initialForm = {} ) => {
 
     // En este return ponemos la información que necesitaremos extraer del formulario ("exponer al mundo exterior")
     return {
+        ...formState,       // Desestructuramos el formState (en este caso tiene el user, emai, pass) para que cree esas propiedades y las exponga
         formState,          // El Valor del formulario
         onInputChange,      // La función para cambiarlo
     }
