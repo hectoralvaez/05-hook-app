@@ -3,7 +3,7 @@ Netlify: https://festivaldegifs.netlify.app
 GitHub: https://github.com/hectoralvaez/festival-de-gifs  
 GitHub Pages: https://hectoralvaez.github.io/festival-de-gifs/  
 
-React, Vite, GitHub, Jest, React Testing Library, Netlify, GitHub Pages
+React, Vite, GitHub, Jest, React Testing Library, Netlify, GitHub Pages, Postman
 
 ---
 
@@ -36,6 +36,9 @@ En terminal: `yarn add --dev @testing-library/react @types/jest jest-environment
 - [Vite](https://vitejs.dev/): La alternativa a [Create React App (CRA)](https://create-react-app.dev/), es más ligero
 - [Use Vite for React Apps instead of CRA](https://dev.to/nilanth/use-vite-for-react-apps-instead-of-cra-3pkg)
 - [React Hook Form](https://react-hook-form.com/): Librería que te ayuda a validar formularios en React. Es una librería mínima sin otras dependencias, a la vez que es eficiente y fácil de usar, lo que requiere que los desarrolladores escriban menos líneas de código que otras librerías de formularios.
+- PETICIONES HTTP 
+    - [Fetch](https://developer.mozilla.org/es/docs/Web/API/Fetch_API/Using_Fetch) Viene en JavaScript
+    - [Axios](https://axios-http.com) Fernando lo prefiere a Fetch
 ---
 
 ## TESTS
@@ -57,6 +60,10 @@ El objeto `screen` de React Testing Library (RTL) proporciona métodos para cons
 
 ---
 
+## APIS USADAS
+- [breakingbadapi](https://breakingbadapi.com)
+---
+
 ## EXTRA INFO
 ### REACT:  
 - Para evitar que, por ejemplo, aparezca duplicado el console.log de la llamada al `useEffect`, eliminar el `<React.StrictMode>` del `main.jsx`.
@@ -65,6 +72,42 @@ El objeto `screen` de React Testing Library (RTL) proporciona métodos para cons
 - Las dev tools de Chrome solo funcionan en desarollo, cuando estamos en producción, no funcionan.
 ### VISUAL STUDIO CODE:  
 - Para crear un Functional Component `rafc`.
+
+
+---
+
+<br />
+
+# 🪝 125. useFetch - CustomHook
+###### (Implementación de API [breakingbadapi](https://breakingbadapi.com))
+
+## Comunicación entre hooks
+
+
+Cada vez que cambie la url en el `useFetch` (es la variable que le pasamos al component), se disparará el `useEffect`, ya que tiene definida la url como dependencia:
+
+```javascript
+export const useFetch = ( url ) => {
+
+    useEffect(() => {
+
+    }, [url])
+    
+    return ;
+}
+```
+
+
+Dentro del useEffect haremos la petición a Fetch API, que es la api que permite hacer peticiones http. Existen alternativas como Axios, que veremos más adelante.  
+
+useEffect internamente puede tener tareas asíncronas, pero su callback no puede ser asincrono. useEffect espera una función pura NO una promesa, que es lo que se pasaría al hacerla "async". Espera una función pura que sirva para hacer una limpieza, NO espera una promesa.  
+
+⛔ MAL: useEffect NO SE PUEDE USAR COMO FUNCIÓN ASÍNCRONA. De esta manera está devolviendo una promesa 
+```javascript
+    useEffect(async() => {
+
+    }, [url])
+```
 
 
 ---
