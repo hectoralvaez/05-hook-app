@@ -78,6 +78,23 @@ El objeto `screen` de React Testing Library (RTL) proporciona métodos para cons
 
 <br />
 
+# 🪝 127. Conectando ambos Hooks (EJERCICIO)
+## Comunicación entre hooks
+
+Ejercicio completo OK 
+Importante, para imprimir variables dentro de una cadena:
+- Entre ``
+- Con `${counter}`
+- `https://www.breakingbadapi.com/api/quotes/${counter}`
+
+Mejora de Fernando:  
+1. Añadir al botón `disabled={isLoading}`, de manera que mientras esté cargando esté deshabilitado el botón.   
+2. Como por defecto la función "increment" ya lleva el valor "1" no es necesario pasarselo: `onClick={ () => increment() }`
+
+---
+
+<br />
+
 # 🪝 126. useFetch + useCounter
 ## Comunicación entre hooks
 
