@@ -78,6 +78,76 @@ El objeto `screen` de React Testing Library (RTL) proporciona métodos para cons
 
 <br />
 
+# 🪝 126. useFetch + useCounter
+## Comunicación entre hooks
+
+### El condicional ternario:  
+En este ejemplo se usa con varias líneas, no se recomienda usarlo si son demasiadas ya que dificulta la lectura del código, aquí un poco justo.
+
+```javascript
+{
+    isLoading
+        ? (
+            <div className="aleert alert-info text-center">
+                Loading...
+            </div>
+        )
+
+        : (
+            <blockquote className="blockquote text-end">
+                <p className="mb-2">Hola mundo</p>
+                <footer className="blockquote-footer">Fernando Herrera</footer>
+            </blockquote>
+        )
+
+}
+```
+
+Para ver la `data` que recibimos podemos hacerlo directamente en consola:  
+`console.log(data)` < Aquí la data en crudo, como lo devuelve la API, en este caso, es un 'array'    
+ 
+`console.log({data})` < De esta manera lo pasamos a objeto: 
+
+
+La API devuelve la data en un array `[]`, esto hace que se tenga que trabajar la data de la sieguiente manera:  
+
+En determinado momento, antes de obtener la `data` su valor es 'null', pero una vez obtenemos la data, hay que trabajar con la primera posición `[0]`, ya que es un array.  
+
+Por lo tanto, el uso de la data será este `{ data[0].quote }`:  
+
+```
+<blockquote className="blockquote text-end">
+    <p>{ data[0].quote }</p>
+    <footer className="blockquote-footer">{ data[0].author }</footer>
+</blockquote>
+```
+
+### Desestructurando la data:
+Como lo que devuelve es un array y en cierto momento la data es "null", javascript daría error al intentar desestructurar un valor "null".  
+
+Si desestructuramos de la siguiente manera:  
+```javascript
+const { author, quote } = data;
+```
+
+Da error y peta la aplicación.
+
+Para asegurarnos de que la 'data' tiene contenido hacemos el siguiente condicional `!!data && data[0]`:
+```javascript
+const { author, quote } = !!data && data[0];  //Hacemos condicional para evitar el "null" de la 'data'
+```
+
+Este condicional con doble negación (!!) se traduce en:  
+SI la data tiene valor `!!data` entonces `&&` asigna el primer valor del array `data[0]`.  
+
+Ahora sí ha quedado desestructurada la data y la podemos usar simplemente con `{ author }` y `{ quote }`.  
+
+Si la API devolviera fuera un objeto, no necesitaríamos hacer todo esto.
+
+---
+
+<br />
+
 # 🪝 125. useFetch - CustomHook
 ###### (Implementación de API [breakingbadapi](https://breakingbadapi.com))
 
