@@ -3,6 +3,9 @@ import { useFetch } from "../hooks/useFetch";
 export const MultipleCustomHooks = () => {
     
     const { data, isLoading, hasError } = useFetch('https://www.breakingbadapi.com/api/quotes/1');
+
+    // const { author, quote } = data; //Da error
+    const { author, quote } = !!data && data[0];  //Hacemos condicional para evitar el "null" de la 'data'
     
     console.log({data, isLoading, hasError})
     console.log(data)
@@ -22,8 +25,8 @@ export const MultipleCustomHooks = () => {
 
                     : (
                         <blockquote className="blockquote text-end">
-                            <p>{ data[0].quote }</p>
-                            <footer className="blockquote-footer">{ data[0].author }</footer>
+                            <p>{ quote }</p>
+                            <footer className="blockquote-footer">{ author }</footer>
                         </blockquote>
                     )
 
