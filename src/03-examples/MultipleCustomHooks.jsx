@@ -5,6 +5,7 @@ export const MultipleCustomHooks = () => {
     const { data, isLoading, hasError } = useFetch('https://www.breakingbadapi.com/api/quotes/1');
     
     console.log({data, isLoading, hasError})
+    console.log(data)
     
     return (
         <>
@@ -21,8 +22,8 @@ export const MultipleCustomHooks = () => {
 
                     : (
                         <blockquote className="blockquote text-end">
-                            <p className="mb-2">Hola mundo</p>
-                            <footer className="blockquote-footer">Fernando Herrera</footer>
+                            <p>{ data[0].quote }</p>
+                            <footer className="blockquote-footer">{ data[0].author }</footer>
                         </blockquote>
                     )
 
