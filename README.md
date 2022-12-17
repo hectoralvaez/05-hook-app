@@ -26,7 +26,11 @@ Para ejecutar la aplicación:
 ---
 
 ### LINKS DE INTERÉS:  
-- [Documentación de React y recursos relacionados](https://es.reactjs.org/docs/getting-started.html)  
+- [React: Documentación y recursos relacionados](https://es.reactjs.org/docs/getting-started.html)  
+- [React: Presentando Hooks](https://es.reactjs.org/docs/hooks-intro.html#motivation): Los _Hooks_ son una nueva incorporación en React 16.8. Te permiten usar estado y otras características de React sin escribir una clase.
+- [React: Referencia de la API de los Hooks](https://es.reactjs.org/docs/hooks-reference.html)
+- [React: Hooks "Motivación"](https://es.reactjs.org/docs/hooks-intro.html#motivation)
+
 - [GitHub](https://github.com/): Plataforma de alojamiento de código para el control de versiones y la colaboración.
 - [Netlify](https://www.netlify.com/): Desplegar desplegar aplicaciones sin BackEnd.
 - [Jest](https://jestjs.io/): Para hacer tests en Babel, TypeScript, Node, React, Angular, Vue y más. (combinada con [React Testing Library](https://testing-library.com/docs/))
@@ -72,6 +76,22 @@ El objeto `screen` de React Testing Library (RTL) proporciona métodos para cons
 - Las dev tools de Chrome solo funcionan en desarollo, cuando estamos en producción, no funcionan.
 ### VISUAL STUDIO CODE:  
 - Para crear un Functional Component `rafc`.
+
+
+---
+
+<br />
+
+# 🪝 129. useRef - Primer uso
+
+[`useRef`](https://es.reactjs.org/docs/hooks-reference.html#useref) es un hook que nos sirve para controlar el valor de una variable. Podemos cambiar ese valor, trabajar con él, pero no va a disparar ninguna re renderización cuando se aplica un cambio.
+
+En este ejemplo estamos usando el `useRef` para hacer referencia a un input para evitar problemas en caso de tener más de uno, es una manera limpia y rápida de seleccionar un elemento del DOM sin tener que recurrir a:
+```javascript
+document.querySelector('input');
+```
+
+Ni siquiera usando una class o un ID para seleccionar el elemento nos aseguramos de estar seleccionando el correcto, ya que si usamos varios componentes podrían tener la misma nomenclatura repetida.
 
 
 ---
