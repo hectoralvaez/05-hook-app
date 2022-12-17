@@ -78,6 +78,55 @@ El objeto `screen` de React Testing Library (RTL) proporciona métodos para cons
 
 <br />
 
+# 🪝 128. Optimizaciones al código anterior
+
+Buenas prácticas:
+1. Preparar un "archivo de barril" para reducir el número de lineas y mejorar la lectura del código. Podemos desestructurar la llamada a todos los hooks del directorio.
+
+```javascript
+// OLD
+import { useFetch } from "../hooks/useFetch";
+import { useCounter } from "../hooks/useCounter";
+
+// NEW
+import { useFetch, useCounter } from "../hooks";
+
+```
+
+2. Para una mejor lectura del condicionarl `isLoading`, pasamos el "loading" y la "quote" a componentes independientes.
+
+
+```javascript
+// OLD
+{
+    isLoading
+        ? (
+            <div className="alert alert-info text-center">
+                Loading...
+            </div>
+        )
+
+        : (
+            <blockquote className="blockquote text-end">
+                <p>{ quote }</p>
+                <footer className="blockquote-footer">{ author }</footer>
+            </blockquote>
+        )
+}
+
+// NEW
+{
+    isLoading
+        ? <LoadingQuote></LoadingQuote>
+        : <Quote quote={quote} author={author} ></Quote>
+}
+
+```
+
+---
+
+<br />
+
 # 🪝 127. Conectando ambos Hooks (EJERCICIO)
 ## Comunicación entre hooks
 
