@@ -82,6 +82,28 @@ El objeto `screen` de React Testing Library (RTL) proporciona métodos para cons
 
 <br />
 
+# 🪝 130. useLayoutEffect
+
+[`useLayoutEffect`](https://es.reactjs.org/docs/hooks-reference.html#uselayouteffect) La firma es idéntica a `useEffect`, pero se dispara de forma síncrona después de todas las mutaciones de DOM. Use esto para leer el diseño del DOM y volver a renderizar de forma sincrónica. Las actualizaciones programadas dentro de `useLayoutEffect` se vaciarán sincrónicamente, antes de que el navegador tenga la oportunidad de pintar.  
+
+(Se recomiendo el uso de `useEffect` siempre que sea posible)
+
+Tiene la misma etructura el que `useEffect`
+```javascript
+useLayoutEffect(() => {
+    first;
+
+    return () => {
+        second;
+    };
+}, [third]);
+```
+
+
+---
+
+<br />
+
 # 🪝 129. useRef - Primer uso
 
 [`useRef`](https://es.reactjs.org/docs/hooks-reference.html#useref) es un hook que nos sirve para controlar el valor de una variable. Podemos cambiar ese valor, trabajar con él, pero no va a disparar ninguna re renderización cuando se aplica un cambio.
