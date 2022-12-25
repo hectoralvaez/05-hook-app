@@ -102,6 +102,19 @@ Para un componente muy sencillo, es más rápido que no lo memorice, pero si hay
 
 Añadiendo dentro de "memo()" el componente, solo se ejecutará si hay cambios en ese componente hijo, no cuando se aplican cambios al componente padre.
 
+ NO se suele utiliza el `memo()` importado directamente de react:
+```javascript
+import { memo } from "react"
+```
+
+Normalmente se llama de la siguiente manera `React.memo()`, de esta manera es más claro a qué hace referencia el "memo".
+
+Si estamos trabajando en un proyecto de CRA (Create React App) nos va a funcionar porque existe la referencia a React de forma global.
+
+Si estamos trabajando en Vite, no nos va a funcionar (a no ser que lo hayamos referenciado de forma global). Para que nos funcione, lo podemos referenciar en el mismo componente:
+```javascript
+import React from "react"
+```
 ---
 
 <br />
