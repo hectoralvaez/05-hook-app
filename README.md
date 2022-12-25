@@ -100,6 +100,7 @@ Esto solo es recomendado si el componente es muy grande o cuando hay un proceso 
 
 Para un componente muy sencillo, es más rápido que no lo memorice, pero si hay funcionalidades internas relativamente pesadas y hay una depreciación a la hora de renderizar cada componente, es buena opción poder usar el `memo`
 
+Añadiendo dentro de "memo()" el componente, solo se ejecutará si hay cambios en ese componente hijo, no cuando se aplican cambios al componente padre.
 
 ---
 
