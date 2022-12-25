@@ -82,6 +82,29 @@ El objeto `screen` de React Testing Library (RTL) proporciona métodos para cons
 
 <br />
 
+# 🪝 131. Memo - Método de React
+Memo es un método de React, no es un hook, pero nos sirve para poder ver más adelante el funcionamiento del hook que se encarga de hacer lo mismo que este método.  
+
+Con este ejemplo vamos a ver que solo se tiene que dibujar el hijo si tiene cambios él mismo, NO si el padre tiene cambios.  
+
+Se usa el `{ JSON.stringify(show) }` porque no se pueden mostrar en pantalla los valores boleanos.
+
+Para alternar el valor de "show" con el `useEffect`: 
+```javascript
+onClick={ () => setShow( !show ) }
+```
+
+Para evitar que se dibuje el componente hijo si no ha sufrido cambios, usamos el Memo.
+
+Esto solo es recomendado si el componente es muy grande o cuando hay un proceso pesado y solo se quiere volver a dibujar cuando cambien sus propiedades, no las del padre.  
+
+Para un componente muy sencillo, es más rápido que no lo memorice, pero si hay funcionalidades internas relativamente pesadas y hay una depreciación a la hora de renderizar cada componente, es buena opción poder usar el `memo`
+
+
+---
+
+<br />
+
 # 🪝 130. useLayoutEffect
 
 [`useLayoutEffect`](https://es.reactjs.org/docs/hooks-reference.html#uselayouteffect) La firma es idéntica a `useEffect`, pero se dispara de forma síncrona después de todas las mutaciones de DOM. Use esto para leer el diseño del DOM y volver a renderizar de forma sincrónica. Las actualizaciones programadas dentro de `useLayoutEffect` se vaciarán sincrónicamente, antes de que el navegador tenga la oportunidad de pintar.  
