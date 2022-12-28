@@ -82,6 +82,41 @@ El objeto `screen` de React Testing Library (RTL) proporciona métodos para cons
 
 <br />
 
+# 🪝 132. useMemo
+
+Ejemplo de uso:
+```javascript
+const memoizedValue = useMemo(() => computeExpensiveValue(a, b), [a, b]);
+```
+
+El hook [useMemo](https://es.reactjs.org/docs/hooks-reference.html#usememo) devuelve un valor memorizado.  
+
+Pasa una función de “crear” y un arreglo de dependencias. useMemo solo volverá a calcular el valor memorizado cuando una de las dependencias haya cambiado. Esta optimización ayuda a evitar cálculos costosos en cada render.   
+
+Nos ayuda a mejorar el proceso de tareas pesadas.   
+
+Es como el `React.memo()` pero usando el hook `useMemo`  
+
+Para entender el uso del hook `useMemo`, creamos una función fuera de la función principal (componente), para que solo se procese cuando sea necesario, no siempre que se llame a la función.
+
+Es una buena práctica hacer una tarea o función fuera del componente, para evitar que se vuelva a asignar la función en memoria.   
+
+```javascript
+const memoizedValue = useMemo(() => heavyStuff( counter ), [] );
+```
+(Si dejamos el arreglo vacío, solo lo memoriza la primera vez)
+
+```javascript
+const memoizedValue = useMemo(() => heavyStuff( counter ), [counter] );
+```
+Si en el array le metemos el valor que queremos controlar, memorizaará cada vez que cambie ese valor, en nuestro caso `counter`.
+
+`useMemo` memoriza un valor. `memoizedValue` solo cambiará si las dependencias de `useMemo` cambian. 
+
+---
+
+<br />
+
 # 🪝 131. Memo - Método de React
 Memo es un método de React, no es un hook, pero nos sirve para poder ver más adelante el funcionamiento del hook que se encarga de hacer lo mismo que este método.  
 

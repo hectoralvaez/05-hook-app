@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useCounter } from "../hooks";
 
 
@@ -14,6 +14,7 @@ export const MemoHook = () => {
 
     const { counter, increment } = useCounter( 4000 );
     const [show, setShow] = useState(false);
+    const memoizedValue = useMemo( () => heavyStuff( counter ), [counter] );
 
     return (
         <>
@@ -22,7 +23,7 @@ export const MemoHook = () => {
             </h1>
             <hr />
 
-            <h4>{ heavyStuff( counter ) }</h4>
+            <h4>{ memoizedValue }</h4>
             <button 
                 className="btn btn-primary"
                 onClick={ () => increment() }    
