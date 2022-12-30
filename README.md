@@ -82,6 +82,25 @@ El objeto `screen` de React Testing Library (RTL) proporciona métodos para cons
 
 <br />
 
+# 🪝 135. Tarea Memorize
+
+Un componente "padre", con 5 botones (componentes) "hijos" que solo se tienen que generar la primera vez que se ejecuta el código, pero NO cada vez que se suma uno de los valores de los botones.
+
+MI SOLUCIÓN:  
+Padre.jsx:  
+- Añadir el `React.memo` al component 
+- Utilizar el hook `useCallback` para memorizar la función `incrementar`
+- Cambiar el incremento del valor (del useState) de `setValor( valor + num )` por un "call back" con el valor actual del counter (c) y a partir de ahí, sumarle `num` a ese mismo valor `setValor( (c) => c + num )`.
+
+NO FUNCIONA:  
+Sigue llamando a los hijos por cada cambio que se hace en cualqueira de ellos.
+
+
+
+---
+
+<br />
+
 # 🪝 134. useCallback con argumentos
 
 En el component "ShowIncrement" pasamos el valor a incrementar desde la función dentro del botón, en este ejemplo `5`.
