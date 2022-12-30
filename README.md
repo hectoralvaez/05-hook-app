@@ -88,13 +88,14 @@ Un componente "padre", con 5 botones (componentes) "hijos" que solo se tienen qu
 
 MI SOLUCIÓN:  
 Padre.jsx:  
-- Añadir el `React.memo` al component 
-- Utilizar el hook `useCallback` para memorizar la función `incrementar`
-- Cambiar el incremento del valor (del useState) de `setValor( valor + num )` por un "call back" con el valor actual del counter (c) y a partir de ahí, sumarle `num` a ese mismo valor `setValor( (c) => c + num )`.
+- Añadir el `React.memo` al component ❌ (El `React.memo` se tiene que aplicar al componente hijo, no al padre)
+- Utilizar el hook `useCallback` para memorizar la función `incrementar` ✅
+- Cambiar el incremento del valor (del useState) de `setValor( valor + num )` por un "call back" con el valor actual del counter (c) y a partir de ahí, sumarle `num` a ese mismo valor `setValor( (c) => c + num )`. ✅ (pero para que tenga más sentido, cambiar `c` por `oldValue`)
 
 NO FUNCIONA:  
 Sigue llamando a los hijos por cada cambio que se hace en cualqueira de ellos.
 
+En esta definición del error tenía la respuesta, lo que se tiene que memorizar es el componente hijo, que es el que dispara el mensaje de consola "Me volví a generar :("
 
 
 ---
