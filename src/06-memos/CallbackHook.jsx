@@ -9,7 +9,7 @@ export const CallbackHook = () => {
         console.log("setCounter(counter + 1)");
         setCounter(counter + 1);
       },
-      [],
+      [counter],
     )
 
     return (
