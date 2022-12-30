@@ -82,6 +82,13 @@ El objeto `screen` de React Testing Library (RTL) proporciona métodos para cons
 
 <br />
 
+# 🆕 INICIO SECCIÓN 10: Profundizando Hooks - useReducer
+
+---
+
+# 🏁 FIN SECCIÓN 9: Profundizando Hooks - Generales
+
+
 # 🪝 135. Tarea Memorize
 
 Un componente "padre", con 5 botones (componentes) "hijos" que solo se tienen que generar la primera vez que se ejecuta el código, pero NO cada vez que se suma uno de los valores de los botones.
