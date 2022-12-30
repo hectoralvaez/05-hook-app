@@ -82,6 +82,34 @@ El objeto `screen` de React Testing Library (RTL) proporciona métodos para cons
 
 <br />
 
+# 🪝 134. useCallback con argumentos
+
+En el component "ShowIncrement" pasamos el valor a incrementar desde la función dentro del botón, en este ejemplo `5`.
+
+```javascript
+onClick={() => {
+    increment( 5 );
+}}
+```
+
+En el component "CallbackHook" recibimos el valor como `value`
+
+```javascript
+const incrementFather = useCallback(
+    ( value ) => {
+        setCounter( (c) => c + value );
+    },
+    [],
+)
+```
+
+PD: Pasamos los anteriores "value" a "c" (de "counter") y ahora el "value" es el valor que enviamos desde la llamada a la función.
+
+
+---
+
+<br />
+
 # 🪝 133. useCallback
 
 El hook [useCallback](https://es.reactjs.org/docs/hooks-reference.html#usecallback) devuelve un valor memorizado.  
