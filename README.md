@@ -82,6 +82,97 @@ El objeto `screen` de React Testing Library (RTL) proporciona métodos para cons
 
 <br />
 
+# 🪝 133. useCallback
+
+El hook [useCallback](https://es.reactjs.org/docs/hooks-reference.html#usecallback) devuelve un valor memorizado.  
+
+Pasa un callback en línea y un arreglo de dependencias. useCallback devolverá una versión memorizada del callback que solo cambia si una de las dependencias ha cambiado. Esto es útil cuando se transfieren callbacks a componentes hijos optimizados que dependen de la igualdad de referencia para evitar renders innecesarias (por ejemplo, shouldComponentUpdate).
+
+
+El `useCallback` es parecido al `useMemo` pero sirve para memorizar funciones que solo se procesarán cuando algo cambie.  
+
+
+## ERROR 1:  
+Pensar que no se volverá a redibujar el componente completo usando `React.memo(...)` y toda la función del ShowIncrement dentro de los parentesis:
+
+```javascript
+import React from "react";
+
+export const ShowIncrement = React.memo( ({ increment }) => {
+    console.log("me volví a generar");
+    return (
+        <button
+            className="btn btn-primary"
+            onClick={() => {
+                increment();
+            }}
+        >
+            Incrementar
+        </button>
+    );
+});
+```
+
+### Motivo del error 1:
+En Javsacript, las funciones y los objetos siempre apuntan a posiciones en memoria diferentes.  
+
+Cada vez que el componente se vuelve a dibujar, la función dentro del componente está en una posición distinta en memoria y el objeto es diferente.  
+
+## ERROR 2:  
+Utilizar el `useCallback` para la función `incrementFather` con el valor `counter` del `useState`.  
+
+```javascript
+const incrementFather = useCallback(
+    () => {
+    console.log("setCounter(counter + 1)");
+    setCounter(counter + 1);
+    },
+    [],
+)
+```
+
+### Motivo del error 2:
+De esta manera se está llamando a la función bien, entra cada vez que se clica el botón, pero como el `counter` está memorizado, cada vez que entra al `useCallback` de la función `incrementFather` el valor es siempre "10", por lo tanto, siempre que hacemos clik, el resultado es 10+1
+
+## ERROR 3:  
+Pensar que el problema es que al usar el `useCallback` sin argumento en el array, solo se redibuja la primera vez.
+
+Sería lógico entonces que si añadimos el `counter` en el array, quede solucionado.  
+
+```javascript
+const incrementFather = useCallback(
+    () => {
+    console.log("setCounter(counter + 1)");
+    setCounter(counter + 1);
+    },
+    [counter],
+)
+```
+
+### Motivo del error 3:
+No es la solición adecuada, ya que cada vez que el `counter` cambia, se vuelve a memorizar `incrementFather` y por lo tanto es una función nueva y se vuelve a dibujar todo de nuevo (volvemos a la situación inicial, como si no estuvieramos usando el `React.memo(...)`).
+
+## SOLUCIÓN:  
+El `setCounter()` se puede llamar con el valor del counter (como estábamos haciebdo hasta ahora):
+```javascript
+setCounter(counter + 1);
+```
+
+Pero también le podemos mandar un "call back" con el valor actual del counter (value) y a partir de ahí, sumarle uno a ese mismo valor:
+
+```javascript
+setCounter( (value) => value + 1 );
+```
+
+La función `setCounter` iternamente sabe que va a cojer el valor del state y le va a sumar uno.
+
+Además, la función `incrementFather` está memorizada y no está cambiando, React lo sabe y la mantiene en el mismo espacio de memoria. Por lo tanto, cuando pasamos `incrementFather` como un argumento `<ShowIncrement increment={incrementFather} />` y el componente está memorizado, entonces no cambia el espacio de memoria.
+
+
+---
+
+<br />
+
 # 🪝 132. useMemo
 
 Ejemplo de uso:
@@ -109,7 +200,7 @@ const memoizedValue = useMemo(() => heavyStuff( counter ), [] );
 ```javascript
 const memoizedValue = useMemo(() => heavyStuff( counter ), [counter] );
 ```
-Si en el array le metemos el valor que queremos controlar, memorizaará cada vez que cambie ese valor, en nuestro caso `counter`.
+Si en el array le metemos el valor que queremos controlar, memorizará cada vez que cambie ese valor, en nuestro caso `counter`.
 
 `useMemo` memoriza un valor. `memoizedValue` solo cambiará si las dependencias de `useMemo` cambian. 
 
