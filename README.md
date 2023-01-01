@@ -82,6 +82,66 @@ El objeto `screen` de React Testing Library (RTL) proporciona métodos para cons
 
 <br />
 
+# 🪝 139. Introducción al concepto de un reducer
+## ¿Qué es un Reducer?
+
+### El Reducer es una función común y corriente o incluso más sencilla, ya que no puede ser asíncrona.  
+
+Ejemplo de función de "Tareas por hacer" (TODOS):
+
+```javascript
+const todoReducer = () => {
+
+}
+```
+
+
+### Debe de ser una función pura, es decir tiene que resolverse de manera interna.
+1. No tiene que tener efectos secundarios, es decir, tiene que poder resolver todo lo que se pide internamente sin necesidad de llamar a otras funciones
+2. No tiene que realizar tareas asíncronas, se tienen que ejecutar de forma síncrona
+3. Debe retornar siempre un nuevo estado, no debemos mutar nunca el estado
+4. No debe de llamar el `localStorage`o `sessionStorage`, son tareas síncronas pero la llamada a esas funciones son consideradas efectos secundarios y si fallan no vamos a devolver un nuevo state, vamos a devolver un error.
+5. Para modificar el state no debe de requerir más que una acción que puede tener o no un argumento.
+
+
+#### Porqué es importante que sea una "función pura"   
+En la función "recuder" tienen que quedar claras las acciones y las modificaciones que realiza esa aplicación.   
+En el reducer tiene que estar la lógica de la manipulación de cada una de las acciones que esa aplicación puede realizar.
+
+## Ciclo de vida de un Reducer:  
+
+### 1 STATE
+En nuestro ejemplo el state es un array de `TODOS` (ahora mismo solo hay un item en el state "Comprar el pan")
+```javascript
+[{
+    id: 1,
+    todo: 'Comprar el pan',
+    done: false
+}]
+```
+
+### 2 SE MUESTRA EL COMPONENTE EN PANTALLA:
+El "state" pasa a la vista del componente para mostrar su estado actual en la página o vista.
+
+### 3 EL USUARIO QUIERE REALIZAR CAMBIOS
+Aquí viene lo interesante, cuando el usuario quiere hacer cambios, no habla directamente con el "state", si lo hicieramos así, estaríamos mutando el state y en los reducers NO está permitido cambiar el estado.   
+
+En cambio, la página o la vista va a crearse una acción (Create, Update, Delete) y esa acción es lo que pasamos al reducer, ya que el reducer tienen el mapa con la lógica de todas las acciones que puede realizar y una vez realizadas las acciones dentro del reducer, se va a actualizar el "state" que pasará la información a la página o vista.  
+
+De esta manera toda la información fluye en una sola vía y queda controlada, esta es la base de Redux.
+
+
+
+### Esta función "Reducer" tiene que devolver un nuevo estado, que es algo que hemos ido haciendo durante todo el curso. Cuando queremos aumentar un contador, no hacemos `counter ++`, lo que hacemos es `setCounter( counter + 1 )` de esa manera estamos devolviendo un nuevo valor al contador y no estamos mutando el estado anterior.
+
+### Normalmente solo reciben dos argumentos:
+    - El valor inicial (initialState)
+    - La acción a ejecutar 
+
+---
+
+<br />
+
 # 🪝 138. Temas puntuales de la sección
 
 ## ¿Qué veremos en esta sección?
