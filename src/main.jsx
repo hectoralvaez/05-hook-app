@@ -12,11 +12,12 @@ import { Padre } from './07-tarea-memo/Padre'
 // import { SimpleForm } from './02-useEffect/SimpleForm'
 // import { FormWithCustomHooks } from './02-useEffect/FormWithCustomHooks'
 // import { MultipleCustomHooks } from './03-examples/MultipleCustomHooks'
+import './08-useReducer/intro-reducer';
 import './index.css'
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  // <React.StrictMode>
-    // <MultipleCustomHooks />
-    <Padre />
-  // </React.StrictMode>
-)
+// ReactDOM.createRoot(document.getElementById('root')).render(
+//   // <React.StrictMode>
+//     // <MultipleCustomHooks />
+//     <Padre />
+//   // </React.StrictMode>
+// )
