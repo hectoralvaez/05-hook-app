@@ -82,6 +82,96 @@ El objeto `screen` de React Testing Library (RTL) proporciona métodos para cons
 
 <br />
 
+# 🪝 141. Idea general de un reducer - Vía código
+
+RECORDATORIO:  
+En React, NO se tienen que añadir elementos a un array con "push", es una mala práctica.  
+
+Explicación de un "reducer" (sin entrar todavía en el hook) para comprender la teoría.  
+
+1. Necesitamos un estado inicial `initialState` que en este caso será un array con una colección de objetos.
+
+Definición del estado inicial:
+```javascript
+const initialState = [{
+    id: 1,
+    todo: 'Recolectar la piedra del Alma',
+    done: false,
+}];
+```
+
+2. El Reducer: No es más que una función pura.
+```javascript
+const todoReducer = () => {
+
+}
+```
+ 
+El Reducer tiene que recibir dos argumentos `state` y `action`:  
+
+a) `state`, en este ejemplo, si no recibe un estado, el valor por defecto será el `initialState`  
+
+b) `action`, que le da la información de como quiere que se cambie el estado. Una acción dentro del Reducer NO MODIFICA el estado del reduceer, lo que está haciendo es devolver uno NUEVO.
+
+Definición inicial de la función "reducer" (con los argumentos "estado" y "acción" y con el return del NUEVO estado, pero sin haber aplicado la acción)
+```javascript
+const todoReducer = ( state = initialState, action = {} ) => {
+
+    return state;
+}
+```
+
+3. El reducer siempre tiene que devolver un estado (`state`)
+
+```javascript
+return state;
+```
+
+Definición inicial de `todos` asignando el estado inicial (`initialState`) que recibe el `todoReducer` y al que no se le aplica ninguna acción:
+```javascript
+let todos = todoReducer();
+```
+
+Definición del nuevo `todo`:
+```javascript
+const newTodo = {
+    id: 2,
+    todo: 'Recolectar la piedra del Poder',
+    done: false,
+}
+```
+
+Definición de la acción:
+```javascript
+const addTodoAction = {
+    type: '[TODO] add todo',
+    payload: newTodo,
+}
+```
+
+Ahora que tenemos definida la acción `addTodoAction` se la podemos enviar al "reducer" de manera que el nuevo estado de `todos` contenga el inicial, más el nuevo que se ha añadido.
+```javascript
+todos = todoReducer( todos, addTodoAction );
+```
+
+Para que devuelva UN NUEVO ESTADO hay que aplicarle una acción que hemos declarado previamente, en este ejemplo `addTodoAction`
+
+Definición FINAL de la función "reducer" (con los argumentos "estado" y "acción", la acción a realizar y con el return del NUEVO estado, ahora sí, ya que le hemos aplicado la acción '[TODO] add todo')
+
+```javascript
+const todoReducer = ( state = initialState, action = {} ) => {
+
+    if ( action.type === '[TODO] add todo' ) {
+        return [ ...state, action.payload ];
+    }
+
+    return state;
+}
+```
+---
+
+<br />
+
 # 🪝 139. Introducción al concepto de un reducer
 ## ¿Qué es un Reducer?
 
