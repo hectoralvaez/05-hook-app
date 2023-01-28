@@ -16,7 +16,7 @@ const initialState = [
 ]
 
 export const TodoApp = () => {
-    const [state, dispatch] = useReducer(todoReducer, initialState);
+    const [todos, dispatch] = useReducer(todoReducer, initialState);
     return (
         <>
             <h1>TodoApp (10) <small>pendientes: 2</small></h1>
