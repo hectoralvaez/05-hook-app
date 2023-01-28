@@ -77,6 +77,42 @@ El objeto `screen` de React Testing Library (RTL) proporciona métodos para cons
 ### VISUAL STUDIO CODE:  
 - Para crear un Functional Component `rafc`.
 
+### BUENAS PRÁCTICAS:
+Cuando estamos trabajando un código, pero todavía no se ha terminado, para evitar pensar que está funcionando correctamente un `return`
+
+```javascript
+throw new Error ('action.type "ABC" todavía no se ha definido');
+```
+---
+
+<br />
+
+# 🪝 142. useReducer - Todo List
+
+>Este Hooks forma parte de los [Hooks adicionales](https://es.reactjs.org/docs/hooks-reference.html#additional-hooks) son variantes de los [Hooks básicos](https://es.reactjs.org/docs/hooks-reference.html#basic-hooks) o solo son necesarios para casos extremos específicos.
+
+```javascript
+const [state, dispatch] = useReducer(reducer, initialArg, init);
+```
+
+En la firma del `useReducer` tenemos:  
+1. La desestructiración de un arreglo con el `state` y el `dispatch` (la acción que tiene que aplicar el `useReducer`, la acción que tiene que "despachar")
+2. El `reducer`: la función que hemos visto en el capítulo anterior. `initialArg`: estado inical. `init`: función de inicialización.
+
+
+El hook [useReducer](https://es.reactjs.org/docs/hooks-reference.html#usereducer) es una alternativa a `useState`. Acepta un reducer de tipo `(state, action) => newState` y devuelve el estado actual emparejado con un método `dispatch`. (Si está familiarizado con Redux, ya sabe cómo funciona).  
+
+`useReducer` a menudo es preferible a `useState` cuando se tiene una lógica compleja que involucra múltiples subvalores o cuando el próximo estado depende del anterior. `useReducer` además te permite optimizar el rendimiento para componentes que activan actualizaciones profundas, porque puedes pasar hacia abajo dispatch en lugar de callbacks.  
+
+
+Para la llamada al `useReducer`:
+```javascript
+const [state, dispatch] = useReducer(todoReducer, initialState);
+```
+
+`state` y `dispatch`son los valores que aparecen por defecto, pero en este caso, sería preferible cambiar `state` por `todos`, ya que aunque es un `state` lo que estamos gestionando, realmente es el listado de "todos".  
+
+En cuanto al `dispatch`, normalmente se llama así si solo tenemos un "reducer". Si tenemos más de un "reducer" en el mismo funcitonal component, es mejor cambiar el nombre por algo más descriptivo como `dispatchTodoAction` para indicar que esta es la función que "despacha" acciones hacia ese reducer en particular.
 
 ---
 
