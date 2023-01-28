@@ -87,6 +87,11 @@ throw new Error ('action.type "ABC" todavía no se ha definido');
 
 <br />
 
+# 🪝 144. Tarea: Crear componentes y emitir eventos
+---
+
+<br />
+
 # 🪝 143. Creando el cascarón de la lista de TODOs
 Aquí preparamos la maqueta que no servirá para añadir toda la programación.
 
