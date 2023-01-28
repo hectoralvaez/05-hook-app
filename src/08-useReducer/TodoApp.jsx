@@ -29,12 +29,12 @@ export const TodoApp = () => {
 
             <div className="row">
                 <div className="col-7">
-                    <TodoList></TodoList>
+                    <TodoList todos={ todos } />
                 </div>
                 <div className="col-5">
                     <h4>Agregar TODO</h4>
                     <hr />
-                    <TodoAdd></TodoAdd>
+                    <TodoAdd onNewTodo={ handleNewTodo } />
                 </div>
             </div>
         </>

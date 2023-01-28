@@ -87,7 +87,11 @@ throw new Error ('action.type "ABC" todavía no se ha definido');
 
 <br />
 
-# 🪝 144. Tarea: Crear componentes y emitir eventos
+# ⭐🪝 144. Tarea: Crear componentes y emitir eventos
+
+Para el `TodoAdd.jsx` se podría usar un `useState`, pero como ya tenemos un hook creado para gestionar formularios, es mejor utilizar el `useForm.js`.
+
+
 ---
 
 <br />
