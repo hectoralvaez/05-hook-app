@@ -87,6 +87,15 @@ throw new Error ('action.type "ABC" todavía no se ha definido');
 
 <br />
 
+# 🪝 143. Creando el cascarón de la lista de TODOs
+Aquí preparamos la maqueta que no servirá para añadir toda la programación.
+
+Toda esta maqueta se separará en componentes ya que crecerá y al tenerlo por separado mejorará la gestión del código y será más cómodo de trabajar.
+
+---
+
+<br />
+
 # 🪝 142. useReducer - Todo List
 
 >Este Hooks forma parte de los [Hooks adicionales](https://es.reactjs.org/docs/hooks-reference.html#additional-hooks) son variantes de los [Hooks básicos](https://es.reactjs.org/docs/hooks-reference.html#basic-hooks) o solo son necesarios para casos extremos específicos.
