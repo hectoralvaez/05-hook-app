@@ -87,7 +87,62 @@ throw new Error ('action.type "ABC" todavía no se ha definido');
 
 <br />
 
-# ⭐🪝 144. Tarea: Crear componentes y emitir eventos
+# ⭐🪝 146. Agregar un nuevo TODO
+
+Como tenemos el reducer, vamos a utilizarlo para agregar un elemento a la lista de tareas.  
+
+Hay declarar los casos de uso que tendremos en nuestro reducer.  
+
+Empezamos con "añadir un nuevo elemento" definiendolo en el `case`.  
+
+Este case SIEMPRE tendrá asociado un return que devovlerá el NUEVO estado, este state puede ser un string, boleando, array, objeto... En nuestro caso, es un array `[]`  
+
+Como siempre, en React, vamos a evitar mutar los arreglos y no vamos a usar el `push`, vamos a usar el Spread Operator (`...`) para recuperar los valores anteriores del array
+
+
+```javascript
+//todoReducer.js
+
+switch ( action.type ) {
+    case '[TODO] Add Todo':
+        return [ ...initialState, action.payload ]
+
+default:
+        initialState;
+}
+```
+
+En `TodoApp.jsx` es donde tenemos de aplicar el reducer.  
+
+El `todo` es el nuevo estado que queremos insertar, es el `payload` que tenemos que enviar al reducer.
+
+Hay que declarar la `action` (con el `type` declarado en el switch del reducer y el `payload` que es el nuevo estado) y esta `action` la enviaremos al `dispatch`.
+
+```javascript
+//TodoApp.jsx
+
+const [todos, dispatch] = useReducer(todoReducer, initialState);
+
+const handleNewTodo = ( todo ) => {
+    const action = {
+        type: '[TODO] Add Todo',
+        payload: todo
+    }
+
+    dispatch( action );
+    
+}
+
+```
+
+
+
+
+---
+
+<br />
+
+# ⭐🪝 144/145. Tarea: Crear componentes y emitir eventos
 
 Para el `TodoAdd.jsx` se podría usar un `useState`, pero como ya tenemos un hook creado para gestionar formularios, es mejor utilizar el `useForm.js`.
 
