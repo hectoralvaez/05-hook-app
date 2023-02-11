@@ -87,6 +87,66 @@ throw new Error ('action.type "ABC" todavía no se ha definido');
 
 <br />
 
+# ⭐🪝 147. Guardar y Leer TODOs en LocalStorage
+
+[Video extra de Fernando explicando el LocalStorage](https://www.youtube.com/watch?v=hb8O0qRqiSk&t=2s)
+
+Aquí haremos persistente la información en LocalStorage.  
+
+
+>LocalStorage y sessionStorage son propiedades de HTML5 (web storage), que permiten almacenar datos en nuestro navegador web. De manera muy similar a como lo hacen las cookies.  
+>
+>Ya hace años que los navegadores tienen la opción de guardar información en LocalStorage (Application > Storage > LocalStorage).  
+>
+>Las características de Local Storage y Session Storage son:
+>- Permiten almacenar entre 30mb a 50mb (dependiendo del navegador) de información; incluyendo texto y multimedia
+>- La información está almacenada en la computadora del cliente y NO es enviada en cada petición del servidor, a diferencia de las cookies
+>- Utilizan un número mínimo de peticiones al servidor para reducir el tráfico de la red
+>- Previenen pérdidas de información cuando se desconecta de la red
+>- La información es guardada por domino web (incluye todas las páginas del dominio)
+
+
+Se podría hacer por cookies también, pero las cookies tienen menos capacidad de almacenamiento y además, viajan con las peticiones http. El LocalStorage se mantienen en el ordenador a no ser que se elimine manualmente.  
+
+Para conseguir almacenar información en LocalStorage, tenemos que ejecutar algo cuando los `todo` cambien, es decir, tenemos que ejecutar un efecto secundario, y eso con conseguiremos mediante un `useEffect`
+
+Usando esta manera el `useEffect` pasamos los `todos`al `localStorage`.  
+
+Es importante el uso de `JSON.stringify`para pasar el objeto a cadena de caracteres.  
+```javascript
+    useEffect(() => {
+      localStorage.setItem('todos', JSON.stringify(todos));
+    }, [todos])
+```
+
+Solo con esto no es suficiente para mantener en memoria los `todos`. Actualmente el problema es que el `useEffect` se dispara cuando cambian los `todos`, pero también cuando el componente se carga por primera vez y en este punto, en la primera carga, está vacío.  
+
+Por lo tanto, lo que hay que hacer es incializar nuestro "state" con los `todos` que previamente existían en el `localStorage`.  
+
+Usaremos la tercera función del `useReducer` que es el inicializador (`initializer`). Es la función que inicializa el reducer, normalmente se declara como `init`.  
+
+Declaramos el inicializador `initializer` (`init`):
+```javascript
+const init = () => {
+    return JSON.parse(localStorage.getItem('todos')) || [];
+}
+```
+
+>`JSON.parse(todos)` es lo contrario que el `JSON.stringify(todos)`, es decir, lo vuelve a objeto.
+
+
+Pasamos el inicializador (init) al `useReducer`:
+```javascript
+const [todos, dispatch] = useReducer(todoReducer, initialState, init);
+```
+
+
+
+
+---
+
+<br />
+
 # ⭐🪝 146. Agregar un nuevo TODO
 
 Como tenemos el reducer, vamos a utilizarlo para agregar un elemento a la lista de tareas.  
