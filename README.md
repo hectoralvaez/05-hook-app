@@ -85,6 +85,16 @@ throw new Error ('action.type "ABC" todavía no se ha definido');
 ```
 ---
 
+# 💩🪝 148. Borrar un TODO 
+Clase muy densa, en las próxima y con Redux, se simplificará el funcionamiento, actualmente, la comunicación va de padre a hijo, y de hijo llega a nieto
+
+```javascript
+return initialState.filter( todo => todo.id !== action.payload );
+```
+Con el `filter` el return está devolviendo un array con el estado inicial menos el "todo" eliminado filtrado por el `id`
+    
+---
+
 <br />
 
 # ⭐🪝 147. Guardar y Leer TODOs en LocalStorage
