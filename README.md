@@ -85,6 +85,29 @@ throw new Error ('action.type "ABC" todavía no se ha definido');
 ```
 ---
 
+
+# ⭐🪝 149. Toggle Todo - Marcar como completado o pendiente un TODO 
+Clase muy fácil, se entiende muy bien el toggle y el funcionamiento.
+
+Para añadir un condicional en la class pasamos de:
+```javascript
+className="align-self-center"
+```
+
+a:
+```javascript
+className={`align-self-center`}
+```
+para poder añadir variables:
+```javascript
+className={`align-self-center ${todo.done && 'text-decoration-line-through'}`}
+```
+En el ejemplo anteior, el problema es que si la variable es `false`, le añade la clase "false" al elemento, para evitarlo, hacemos un ternario:
+```javascript
+className={`align-self-center ${ (todo.done) ? 'text-decoration-line-through' : '' }`}
+```
+
+
 # 💩🪝 148. Borrar un TODO 
 Clase muy densa, en las próxima y con Redux, se simplificará el funcionamiento, actualmente, la comunicación va de padre a hijo, y de hijo llega a nieto
 
