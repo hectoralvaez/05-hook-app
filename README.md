@@ -77,14 +77,25 @@ El objeto `screen` de React Testing Library (RTL) proporciona métodos para cons
 ### VISUAL STUDIO CODE:  
 - Para crear un Functional Component `rafc`.
 
-### BUENAS PRÁCTICAS:
+### BUENAS PRÁCTICAS:
 Cuando estamos trabajando un código, pero todavía no se ha terminado, para evitar pensar que está funcionando correctamente un `return`
 
 ```javascript
 throw new Error ('action.type "ABC" todavía no se ha definido');
 ```
+
 ---
 
+<br />
+
+# 📝🪝 151. Resolución de la tarea - useTodos 
+En esta tarea se saca toda la lógica de `TodoApp` al hook `useTodo`.
+
+En la segunda parte de la clase crean en el hook `useTodo` las variables `todosCount`y `pendingTodosCount` y las recogemos en `TodoApp`.
+
+---
+
+<br />
 
 # ⭐🪝 149. Toggle Todo - Marcar como completado o pendiente un TODO 
 Clase muy fácil, se entiende muy bien el toggle y el funcionamiento.
@@ -107,6 +118,9 @@ En el ejemplo anteior, el problema es que si la variable es `false`, le añade l
 className={`align-self-center ${ (todo.done) ? 'text-decoration-line-through' : '' }`}
 ```
 
+---
+
+<br />
 
 # 💩🪝 148. Borrar un TODO 
 Clase muy densa, en las próxima y con Redux, se simplificará el funcionamiento, actualmente, la comunicación va de padre a hijo, y de hijo llega a nieto
