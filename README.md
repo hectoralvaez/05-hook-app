@@ -86,7 +86,51 @@ throw new Error ('action.type "ABC" todavía no se ha definido');
 
 ---
 
+# 🪝 155. Introducción al Context
+Clase teórica sobe lo que significa el `Contex` y comparar el uso que hacíamos anteriormente sin el uso del context y cómo era la comunicación entre componentes.
+
 <br />
+
+---
+
+
+# 🪝 154. Temas puntuales de la sección
+
+## ¿Qué veremos en esta sección?
+
+- Context
+- Provider
+- useContext
+- React Router
+- Links y NavLinks
+- CreateContext
+- SPA ( Single Page Application )
+
+El objetivo de la sección es principalmente aprender sobre el Context, el Router es un valor agregado que explotaremos mucho más en próximas secciones, pero al usar un Router, podemos explicar claramente el problema y necesidad del context.
+
+
+---
+
+
+# 🪝 153. Introducción a la sección
+
+[`useContext`](https://es.react.dev/reference/react/useContext) es un Hook de React que te permite leer y suscribirte a un contexto desde tu componente.
+
+<br />
+
+---
+
+# 🆕 INICIO SECCIÓN 11: Profundizando Hooks - useContext
+
+<br />
+
+---
+
+# 🏁 FIN SECCIÓN 10: Profundizando Hooks - useReducer
+
+
+<br />
+---
 
 # 📝🪝 151. Resolución de la tarea - useTodos 
 En esta tarea se saca toda la lógica de `TodoApp` al hook `useTodo`.
