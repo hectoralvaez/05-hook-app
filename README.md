@@ -86,6 +86,26 @@ throw new Error ('action.type "ABC" todavía no se ha definido');
 
 ---
 
+# 🪝 156. Preparación de nuestra aplicación con rutas
+
+1.  Iniciar `09-useContext`con las diferentes páginas que tendrá el proyecto y que se comunicarán entre si utilizando el `Context`.
+
+
+2. Instalación de 'React Router':
+```
+$ yarn add react-router-dom@6
+```
+
+
+3. Configuración de `BrowserRouter`
+`BrowserRouter` es un Componente de Nivel Suprerior (Higher-Order Component "HOC").
+
+Los HOC son componentes como cualquier otro, solo que recibe otros componentes dentro de él, como si un `<div>` fuera un HOC por contener dentro un `<h1>`, `<h2>`, `<p>`, etc.
+
+Esto es útil ya que de esta manera, todos los hijos que estén dentro de ese HOC tendrán acceso a información que tenga este padre.
+
+---
+
 # 🪝 155. Introducción al Context
 Clase teórica sobe lo que significa el `Contex` y comparar el uso que hacíamos anteriormente sin el uso del context y cómo era la comunicación entre componentes.
 
