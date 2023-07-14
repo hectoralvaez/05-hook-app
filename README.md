@@ -40,6 +40,9 @@ En terminal: `yarn add --dev @testing-library/react @types/jest jest-environment
 - [Vite](https://vitejs.dev/): La alternativa a [Create React App (CRA)](https://create-react-app.dev/), es más ligero
 - [Use Vite for React Apps instead of CRA](https://dev.to/nilanth/use-vite-for-react-apps-instead-of-cra-3pkg)
 - [React Hook Form](https://react-hook-form.com/): Librería que te ayuda a validar formularios en React. Es una librería mínima sin otras dependencias, a la vez que es eficiente y fácil de usar, lo que requiere que los desarrolladores escriban menos líneas de código que otras librerías de formularios.
+- ['React Router'](https://reactrouter.com): Biblioteca de enrutamiento con la que puedes definir diferentes rutas dentro de tu aplicación y asignar componentes específicos a cada ruta. Cuando el usuario navega a una ruta determinada, React Router se encarga de renderizar el componente correspondiente en el lugar adecuado de la interfaz de usuario. Es esencial para construir aplicaciones de una sola página (SPA) con múltiples rutas y vistas en React, ya que facilita el enrutamiento y la navegación entre componentes de manera eficiente y estructurada.
+
+
 - PETICIONES HTTP 
     - [Fetch](https://developer.mozilla.org/es/docs/Web/API/Fetch_API/Using_Fetch) Viene en JavaScript
     - [Axios](https://axios-http.com) Fernando lo prefiere a Fetch
@@ -86,12 +89,46 @@ throw new Error ('action.type "ABC" todavía no se ha definido');
 
 ---
 
+# 🪝 157. Configurar Router en React
+
+Documentación de ['React Router'](https://reactrouter.com/).
+
+En esta clase creamos la navegación entre diferentes pantallas en nuestra aplicación.
+
+Hay varias formas de configurar nuestras rutas, pero idealmente se tendrían que definir en el punto más alto de nuestra aplicación, en nuestro caso en `MainApp.jsx`.
+
+Routes es otro HOC (Higher-Order Component) que va a recibir un arreglo de hijos con las rutas de la aplicación.
+
+Ejemplo: en `MainApp.jsx`
+```javascript
+<Routes>
+    <Route path="/" element={ <HomePage /> } />
+    <Route path="login" element={ <LoginPage /> } />
+    <Route path="about" element={ <AboutPage /> } />
+
+    <Route path="/*" element={ <Navigate to="about" /> } />
+</Routes>
+```
+
+
+```javascript
+// Para definir una ruta en caso de que no exista:
+// 1 - De esta manera te lleva a "About", pero en la barra de navegación se queda la ruta errónea que se ha introducido:
+<Route path="/*" element={ <AboutPage /> } />
+
+// 2 - Es una mejor práctica realizar las redirecciones con `Navigate` (hay que importarlo también de 'react-router-dom')
+<Route path="/*" element={ <Navigate to={ <AboutPage /> } /> } />
+```
+
+
+---
+
 # 🪝 156. Preparación de nuestra aplicación con rutas
 
 1.  Iniciar `09-useContext`con las diferentes páginas que tendrá el proyecto y que se comunicarán entre si utilizando el `Context`.
 
 
-2. Instalación de 'React Router':
+2. Instalación de ['React Router'](https://reactrouter.com/es/main/start/tutorial#setup):
 ```
 $ yarn add react-router-dom@6
 ```
@@ -103,6 +140,14 @@ $ yarn add react-router-dom@6
 Los HOC son componentes como cualquier otro, solo que recibe otros componentes dentro de él, como si un `<div>` fuera un HOC por contener dentro un `<h1>`, `<h2>`, `<p>`, etc.
 
 Esto es útil ya que de esta manera, todos los hijos que estén dentro de ese HOC tendrán acceso a información que tenga este padre.
+
+Ejemplo: en `main.jsx`
+```javascript
+<BrowserRouter>
+    <MainApp />
+</BrowserRouter>
+```
+
 
 ---
 
