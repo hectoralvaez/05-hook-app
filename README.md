@@ -89,6 +89,27 @@ throw new Error ('action.type "ABC" todavía no se ha definido');
 
 ---
 
+# 🪝 158. Link
+Añadimos un menú de navegación con `Link`
+
+Si utilizamos el clásico anchor tag `<a>`, cada vez que hagamos click en ese link, al ir a esa página hay un full refresh de la aplicación, lo que implica volver a cargar toda la librería de React, TODOS los componentes, etc... cuando en realidad SOLO se está cambiando una parte concreta de nuestra aplicación.
+
+```
+<a href="/">Home</a>
+<a href="/about">About</a>
+<a href="/login">Login</a>
+```
+
+Uso de `<Link>` para cargar SOLO la parte de la aplicación que cambia:
+```
+<Link to="/">Home</Link>
+<Link to="/about">About</Link>
+<Link to="/login">Login</Link>
+```
+
+
+---
+
 # 🪝 157. Configurar Router en React
 
 Documentación de ['React Router'](https://reactrouter.com/).
