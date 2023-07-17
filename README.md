@@ -92,7 +92,7 @@ throw new Error ('action.type "ABC" todavía no se ha definido');
 # 🪝 159. NavLink
 
 [React Router (Nav Link)](https://reactrouter.com/en/main/components/nav-link)
-Un <NavLink> es un tipo especial de <Link> que sabe si está o no "activo" o "pendiente". Esto es útil al crear un menú de navegación, como un menú o un conjunto de pestañas donde nos gustaría mostrar cuál de ellas está seleccionada actualmente. También proporciona un contexto útil para la tecnología de asistencia, como los lectores de pantalla.
+Un `<NavLink>` es un tipo especial de `<Link>` que sabe si está o no "activo" o "pendiente". Esto es útil al crear un menú de navegación, como un menú o un conjunto de pestañas donde nos gustaría mostrar cuál de ellas está seleccionada actualmente. También proporciona un contexto útil para la tecnología de asistencia, como los lectores de pantalla.
 
 Ejemplo que pone Fernando:
 ```javascript
@@ -120,7 +120,7 @@ Añadimos un menú de navegación con `Link`
 
 [React Router (Link)](https://reactrouter.com/en/main/components/link)
 
-Un <Link> es un elemento que permite al usuario navegar a otra página haciendo clic o tocándola. En react-router-dom, un <Link> representa un elemento <a> accesible con un href real que apunta al recurso al que se vincula. Esto significa que cosas como hacer clic con el botón derecho en un <Link> funcionan como cabría esperar. Puede usar <Link reloadDocument> para omitir el enrutamiento del lado del cliente y dejar que el navegador maneje la transición normalmente (como si fuera un <a href>).
+Un `<Link>` es un elemento que permite al usuario navegar a otra página haciendo clic o tocándola. En react-router-dom, un `<Link>` representa un elemento `<a>` accesible con un href real que apunta al recurso al que se vincula. Esto significa que cosas como hacer clic con el botón derecho en un `<Link>` funcionan como cabría esperar. Puede usar `<Link reloadDocument>` para omitir el enrutamiento del lado del cliente y dejar que el navegador maneje la transición normalmente (como si fuera un `<a href>`).
 
 
 Si utilizamos el clásico anchor tag `<a>`, cada vez que hagamos click en ese link, al ir a esa página hay un full refresh de la aplicación, lo que implica volver a cargar toda la librería de React, TODOS los componentes, etc... cuando en realidad SOLO se está cambiando una parte concreta de nuestra aplicación.
