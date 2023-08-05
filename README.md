@@ -27,6 +27,7 @@ Para ejecutar la aplicación:
 
 ### LINKS DE INTERÉS:  
 - [React: Documentación y recursos relacionados](https://es.reactjs.org/docs/getting-started.html)  
+- [React: Aprende React](https://es.react.dev/learn): Documentación de React. Introducción al 80% de los conceptos de React de uso diario
 - [React: Presentando Hooks](https://es.reactjs.org/docs/hooks-intro.html#motivation): Los _Hooks_ son una nueva incorporación en React 16.8. Te permiten usar estado y otras características de React sin escribir una clase.
 - [React: Referencia de la API de los Hooks](https://es.reactjs.org/docs/hooks-reference.html)
 - [React: Hooks "Motivación"](https://es.reactjs.org/docs/hooks-intro.html#motivation)
@@ -89,7 +90,74 @@ throw new Error ('action.type "ABC" todavía no se ha definido');
 
 ---
 
-# 🪝 159. NavLink
+
+
+
+# 🪝 160. CreateContext y ContextProvider
+
+[`createContext`](https://es.react.dev/reference/react/createContext) te permite crear un "contexto" que los componentes pueden proporcionar o leer.
+
+
+> ℹ️ [Contexto](https://es.react.dev/learn/passing-data-deeply-with-context):
+> Por lo general, pasarás información desde un componente padre a un componente hijo por medio de props. Pero pasar props puede convertirse en una tarea verbosa e inconveniente si tienes que pasarlas a través de múltiples componentes, o si varios componentes en tu aplicación necesitan la misma información. El contexto permite que cierta información del componente padre esté disponible en cualquier componente del árbol que esté por debajo de él sin importar qué tan profundo sea y sin pasar la información explícitamente por medio de props. 
+
+El contexto es la estructura de componentes de nuestra aplicación que se genera en el navegador, se puede ver al inspeccionar elemento yendo a la pestaña de React "Components". 
+
+Por lo general se usaran Higher-Order Components anidados. Estos HOC generan su propia estructura y sus "proveedores". En el caso de "BrowserRouter" genera:
+
+```
+<BrowserRouter> 
+    <Router>
+        <Navigation.Provider>
+            <Location.Provider>
+```
+
+Los "providers" proveen de información y control del componente que se podrá compartir con el resto de componentes dentro del arbol generado.
+
+En este ejercicio creamos el `UserContext.jsx` donde guardaremos toda la información referente al usuario, podríamos tener otros context de cualquier otro tipo dentro de la carpeta "context". 
+
+Este `UserContext.jsx` es un HOC, no usamos el "rafc" para generarlo. Es un context especializado.
+
+```javascript
+import { createContext } from "react";
+
+export const UserContext = createContext();
+```
+
+Creamos también `UserProvider.jsx` aquí sí usamos el "rafc" para generarlo ya que es el típico Functional Component, pero en este caso va a tener una cosa que diferencia al Functional Component tradicional.
+
+```javascript
+// Creado como un Functional Component tradicional
+export const UserProvider = () => {
+  return (
+    <div>UserProvider</div>
+  )
+}
+```
+
+Al ser un HOC, a parte de recibir las propiedasdes que necesite, va a poder recibir los "childrens".
+
+```javascript
+// Impotamos el "UserContext" para poderlo usar
+import { UserContext } from "./UserContext"
+
+export const UserProvider = ({ children }) => {
+  return (
+    // Pasamos el valor al que van a poder acceder todos los hijos dentro del arbol del "context"
+    <UserContext.Provider value={{ hola: 'Mundo' }}>
+        {children}
+    </UserContext.Provider>
+  )
+}
+```
+
+Para poderlo usar, lo tenemos que colocar en el punto más alto donde los hijos lo vayan a necesitar.
+
+En este ejemplo lo ponemos en el `MainApp.jpx`, cambiando el fragmento "<>" por "<UserProvider>". De esta manera, todos los components y subcomponents, podrán acceder a esta información.
+
+---
+
+# ⭐🪝 159. NavLink
 
 [React Router (Nav Link)](https://reactrouter.com/en/main/components/nav-link)
 Un `<NavLink>` es un tipo especial de `<Link>` que sabe si está o no "activo" o "pendiente". Esto es útil al crear un menú de navegación, como un menú o un conjunto de pestañas donde nos gustaría mostrar cuál de ellas está seleccionada actualmente. También proporciona un contexto útil para la tecnología de asistencia, como los lectores de pantalla.
