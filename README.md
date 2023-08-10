@@ -91,6 +91,40 @@ throw new Error ('action.type "ABC" todavía no se ha definido');
 ---
 
 
+# ⭐🪝 161. useContext
+
+---
+
+Para hacer uso del contexto, lo único que hay que hacer es, en la página donde necesitamos utilizar  ese contexto, importar el `useContext` de React y nuestro contexto, en este caso, el contexto del usuario `UserContext`:
+
+```javascript
+import { useContext } from "react"
+import { UserContext } from "./context/UserContext"
+```
+
+Una vez tenemos esta información, ya podemos trabajar con ella:
+
+De esta manera mostramos en consola toda la información que hay en `UserContext`:
+```javascript
+const algo = useContext( UserContext );
+console.log(algo);
+```
+
+Pero lo que realmente necesitamos es desestructurar esa información para trabajar mejor de la siguiente manera:
+
+```javascript
+const { user } = useContext( UserContext );
+```
+
+Ahora ya podemos llamar a cada parte de ese contenido dentro del "html":
+```javascript
+<h1>HomePage <small>{ user.name }</small></h1>
+
+<pre>
+    { JSON.stringify( user, null, 3 )}
+</pre>
+```
+
 
 
 # 🪝 160. CreateContext y ContextProvider
