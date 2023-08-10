@@ -125,6 +125,24 @@ Ahora ya podemos llamar a cada parte de ese contenido dentro del "html":
 </pre>
 ```
 
+# ⭐🪝 161. useContext (v2)
+
+Establecer la información del usuario desde una página, para comprobar que una vez hecho, todas tendrán acceso a esa información, aunque no estuviera previamente establecido:
+
+
+Para evitar errores, como NO vamos a establecer en un inicio el valor de usuario, cuando se llama, hay que añadirle un "?" para que en caso de que no existe, no pinte nada y evitar así el error:
+
+```javascript
+<h1>HomePage <small>{ user?.name }</small></h1>
+```
+
+IMPORTANTE:  
+Ver las diferencias que se han aplicado en el código en el commit de los archivos. Se ve cómo cambia el funcionamiento y la carga de la información del usuario.
+
+(Según Fernando, no está bien hecho, pero sirver para ver el funcionamiento)
+
+
+
 
 
 # 🪝 160. CreateContext y ContextProvider
