@@ -58,7 +58,72 @@ En terminal: `yarn add --dev @testing-library/react @types/jest jest-environment
 2. Act (Actuar) => Realiza la llamada al método a probar con los parámetros preparados para tal fin.
 3. Assert (Confirmar/Comprobar) => Comprueba que el método de pruebas ejecutado se comporta tal y como teníamos previsto que lo hiciera.
 
-### JEST:
+## JEST:
+
+### [Guia de instalación y configuracion de Jest + React Testing Library](https://gist.github.com/Klerith/ca7e57fae3c9ab92ad08baadc6c26177)
+### En proyectos de React + Vite
+
+### 1. Instalaciones en consola:
+```
+yarn add --dev jest babel-jest @babel/preset-env @babel/preset-react 
+yarn add --dev @testing-library/react @types/jest jest-environment-jsdom
+```
+
+### 2. Opcional: Si usamos Fetch API en el proyecto:
+
+En nuestro caso estamos usando Fetch API en el hook `useFetch.js`
+
+```javascript
+const resp = await fetch(url);
+```
+Por lo tanto, se tendría que hacer la instalación via terminal con el siguiente comando: 
+```
+yarn add --dev whatwg-fetch
+```
+
+Pero como estamos usando una versión de node superior a la 18.0.0 (actualmente la 18.7.0), lo más probable es que ya lo contenga y no sea necesaria la instalación.
+
+
+### 3. Actualizar los scripts del __package.json__
+```
+"scripts: {
+  ...
+  "test": "jest --watchAll"
+```
+
+### 4. Crear la configuración de babel __babel.config.js__
+```
+module.exports = {
+    presets: [
+        [ '@babel/preset-env', { targets: { esmodules: true } } ],
+        [ '@babel/preset-react', { runtime: 'automatic' } ],
+    ],
+};
+```
+
+### 5. Opcional, pero eventualmente necesario, crear Jest config y setup:
+
+__jest.config.js__
+```
+module.exports = {
+    testEnvironment: 'jest-environment-jsdom',
+    setupFiles: ['./jest.setup.js']
+}
+```
+
+__jest.setup.js__
+```
+// En caso de necesitar la implementación del FetchAPI
+import 'whatwg-fetch'; // <-- yarn add whatwg-fetch
+```
+
+### Para iniciar los tests:
+```
+yarn test
+```
+
+
+## Extra info Jest
 [expect](https://jestjs.io/docs/expect)
 
 ### REACT TESTING LIBRARY (RTL):  
@@ -90,6 +155,73 @@ throw new Error ('action.type "ABC" todavía no se ha definido');
 
 ---
 
+# 💾 🪝 166. Inicio de proyecto - Pruebas sobre Hooks (instalación y configuracion de Jest + React Testing Library)
+
+### [Guia de instalación y configuracion de Jest + React Testing Library](https://gist.github.com/Klerith/ca7e57fae3c9ab92ad08baadc6c26177)
+### En proyectos de React + Vite
+
+### 1. Instalaciones en consola:
+```
+yarn add --dev jest babel-jest @babel/preset-env @babel/preset-react 
+yarn add --dev @testing-library/react @types/jest jest-environment-jsdom
+```
+
+### 2. Opcional: Si usamos Fetch API en el proyecto:
+
+En nuestro caso estamos usando Fetch API en el hook `useFetch.js`
+
+```javascript
+const resp = await fetch(url);
+```
+Por lo tanto, se tendría que hacer la instalación via terminal con el siguiente comando: 
+```
+yarn add --dev whatwg-fetch
+```
+
+Pero como estamos usando una versión de node superior a la 18.0.0 (actualmente la 18.7.0), lo más probable es que ya lo contenga y no sea necesaria la instalación.
+
+
+### 3. Actualizar los scripts del __package.json__
+```
+"scripts: {
+  ...
+  "test": "jest --watchAll"
+```
+
+### 4. Crear la configuración de babel __babel.config.js__
+```
+module.exports = {
+    presets: [
+        [ '@babel/preset-env', { targets: { esmodules: true } } ],
+        [ '@babel/preset-react', { runtime: 'automatic' } ],
+    ],
+};
+```
+
+### 5. Opcional, pero eventualmente necesario, crear Jest config y setup:
+
+__jest.config.js__
+```
+module.exports = {
+    testEnvironment: 'jest-environment-jsdom',
+    setupFiles: ['./jest.setup.js']
+}
+```
+
+__jest.setup.js__
+```
+// En caso de necesitar la implementación del FetchAPI
+import 'whatwg-fetch'; // <-- yarn add whatwg-fetch
+```
+
+### Para iniciar los tests:
+```
+yarn test
+```
+
+
+## Extra info Jest
+[expect](https://jestjs.io/docs/expect)
 
 # 🪝 165. Temas puntuales de la sección
 
