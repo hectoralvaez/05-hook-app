@@ -53,6 +53,17 @@ En terminal: `yarn add --dev @testing-library/react @types/jest jest-environment
 > NOTA:  
 > Siempre falta tiempo para hacer tests, por lo tanto, se recomienda, como mínimo, hacer el test de la ruta crítica, es decir, la parte principal de la app. Si fuera una tienda, la ruta crítica es el proceso de compra (añadir productos al carito, el cesto de la compra, etc...)  
 
+
+> ⚠️ NOTA IMPORANTE:  
+> Si da error a la hora de lanzar los test:
+> 1.  Probar a eliminar la carpeta `node_modules` y volver a ejecutar `yarn install`. 
+> 2. Cambiar la extensión del archivo `babel.config.js` a `babel.config.cjs`  
+
+> CONSEJO:  
+> Parece muy evidente, pero no está de más recordar empezar a testear los componentes más sencillos.  
+> Por definirlos de diferentes maneras: con menos dependencias, que reciben menos properties, los más atómicos, etc.  
+> De manera que conforme se vanyan testeando los más complicados, los sencillos ya estén testeados.  
+
 ### [Más info de tests AAA (Patrón AAA)](https://geeks.ms/jorge/2018/08/25/unit-testing-y-el-patron-aaa/)  
 1. Arrange (Organizar/Inicializa) => Inicializa los objetos y establece los valores de los datos que vamos a utilizar en el Test que lo contiene.
 2. Act (Actuar) => Realiza la llamada al método a probar con los parámetros preparados para tal fin.
@@ -81,7 +92,7 @@ Por lo tanto, se tendría que hacer la instalación via terminal con el siguient
 yarn add --dev whatwg-fetch
 ```
 
-Pero como estamos usando una versión de node superior a la 18.0.0 (actualmente la 18.7.0), lo más probable es que ya lo contenga y no sea necesaria la instalación.
+A pesar de estar usando una versión de node superior a la 18.0.0 (actualmente la 18.7.0), es necesaria la instalación.
 
 
 ### 3. Actualizar los scripts del __package.json__
@@ -91,7 +102,7 @@ Pero como estamos usando una versión de node superior a la 18.0.0 (actualmente 
   "test": "jest --watchAll"
 ```
 
-### 4. Crear la configuración de babel __babel.config.js__
+### 4. Crear la configuración de babel __babel.config.cjs__
 ```
 module.exports = {
     presets: [
@@ -103,7 +114,7 @@ module.exports = {
 
 ### 5. Opcional, pero eventualmente necesario, crear Jest config y setup:
 
-__jest.config.js__
+__jest.config.cjs__
 ```
 module.exports = {
     testEnvironment: 'jest-environment-jsdom',
@@ -155,6 +166,73 @@ throw new Error ('action.type "ABC" todavía no se ha definido');
 
 ---
 
+# ⭐⭐ 🚧 🪝 167. Pruebas sobre useCounter - CustomHook
+Para empezar a testear hooks, lo primero es importar `renderHook` de React Testing Library:
+```javascript
+import { renderHook } from "@testing-library/react";
+```
+
+Y el hook a testear:
+```javascript
+import { useCounter } from "../../src/hooks/useCounter";
+```
+
+Una vez tenemos esto, describimos el test general del hook donde iremos haciendo las pruebas puntuales de funcionamiento:
+```javascript
+describe('Pruebas en el UserCounter', () => {
+    // Aqui cargaremos los tests.
+});
+```
+
+Dentro de la descripción, iremos añadiendo los tests puntuales:
+```javascript
+describe('Pruebas en el UserCounter', () => {
+    test('Debe retornar el valor por defecto', () => {
+        const { result } = renderHook( () => useCounter() );
+        console.log(result);
+    });
+});
+```
+
+Para recordar los valores que devuelve el hook podemos utilizar la función `renderHook` de manera que almacenando el resultado en un objeto, al pintarlo en consola, aparecerá la siguiente información:
+```
+// Lo que devuelve el console.log
+{
+    current: {
+        counter: 10,
+        increment: [Function: increment],
+        decrement: [Function: decrement],
+        reset: [Function: reset]
+    }
+}
+```
+Ahora que sabemos que el objeto principal es `current`, podemos desestructurarlo para poder trabajar de forma independiente con cada uno de los valores que devuelve:   
+
+
+```javascript
+describe('Pruebas en el UserCounter', () => {
+    test('Debe retornar el valor por defecto', () => {
+        const { result } = renderHook( () => useCounter() );
+        const { counter, increment, decrement, reset} = result.current;
+    });
+});
+```
+
+Y ya podemos iniciar nuestros tests, en este caso, confirmar que el valor por defecto del contador (`counter`) que se envía a la función es "10":
+
+```javascript
+describe('Pruebas en el UserCounter', () => {
+    test('Debe retornar el valor por defecto', () => {
+        const { result } = renderHook( () => useCounter() );
+        const { counter, increment, decrement, reset} = result.current;
+
+        expect( counter ).toBe(10);
+    });
+});
+```
+
+---
+
 # 💾 🪝 166. Inicio de proyecto - Pruebas sobre Hooks (instalación y configuracion de Jest + React Testing Library)
 
 ### [Guia de instalación y configuracion de Jest + React Testing Library](https://gist.github.com/Klerith/ca7e57fae3c9ab92ad08baadc6c26177)
@@ -178,7 +256,7 @@ Por lo tanto, se tendría que hacer la instalación via terminal con el siguient
 yarn add --dev whatwg-fetch
 ```
 
-Pero como estamos usando una versión de node superior a la 18.0.0 (actualmente la 18.7.0), lo más probable es que ya lo contenga y no sea necesaria la instalación.
+A pesar de estar usando una versión de node superior a la 18.0.0 (actualmente la 18.7.0), es necesaria la instalación.
 
 
 ### 3. Actualizar los scripts del __package.json__
@@ -188,7 +266,7 @@ Pero como estamos usando una versión de node superior a la 18.0.0 (actualmente 
   "test": "jest --watchAll"
 ```
 
-### 4. Crear la configuración de babel __babel.config.js__
+### 4. Crear la configuración de babel __babel.config.cjs__
 ```
 module.exports = {
     presets: [
@@ -200,7 +278,7 @@ module.exports = {
 
 ### 5. Opcional, pero eventualmente necesario, crear Jest config y setup:
 
-__jest.config.js__
+__jest.config.cjs__
 ```
 module.exports = {
     testEnvironment: 'jest-environment-jsdom',
