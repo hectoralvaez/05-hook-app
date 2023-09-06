@@ -166,6 +166,124 @@ throw new Error ('action.type "ABC" todavía no se ha definido');
 
 ---
 
+
+# ⭐ 🚧 🪝 168. Ejecutar funciones del customHook dentro de las pruebas
+
+Cuando necesitamos hacer un cambio de estado de React en un componente para testearlo, es necesario que este cambio de estado esté dentro de un `act()`.  
+
+Este es el error y la información que lanza la consola si no llamas la función dentro del `act()`.  
+
+```
+console.error
+Warning: An update to TestComponent inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+```
+
+```javascript
+act(() => {
+    /* fire events that update state */
+});
+/* assert on the output */
+
+```
+
+```
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://reactjs.org/link/wrap-tests-with-act
+    at TestComponent (/Users/hectorpenalvapelaez/www/react/05-hook-app/node_modules/@testing-library/react/dist/pure.js:278:5)
+```
+
+Con la función dentro del `act()`, ya no da error, pero ahora no está testeando bien la función:
+```javascript
+test('Debe incrementar el contador.', () => {
+    const { result } = renderHook( () => useCounter() );
+    const { counter, increment} = result.current;
+
+    act( () => {
+        increment();
+    });
+
+    expect( counter ).toBe(11);
+
+
+});
+```
+
+El valor del `conuter` desestructurado y llamado en el "expect" `expect( counter ).toBe(11);` no se actualiza cuando pasa por el `increment` dentro del `act()`.  
+
+El problema es que no se actualiza porque cuando trabajamos con valores primitivos (`strings`, `números`, `boleanos`...) estos valores se extran y se crean nuevas variables, por lo tanto esa variable va a tener siempre el valor con el que se ha extraido (esto no pasa con los `objetos`, ya que los `objetos` pasan por referencia).  
+
+Para evitar este error, hay que hacer referencia a la variable sin desestructurar `result.current.counter`  
+
+Quedando el test de la siguiente manera:  
+```javascript
+test('Debe incrementar el contador.', () => {
+    const { result } = renderHook( () => useCounter() );
+    const { increment} = result.current;
+
+    act( () => {
+        increment();
+    });
+
+    expect( result.current.counter ).toBe(11);
+});
+```
+
+
+Si quisieramos llamar dos veces la función `increment()` dentro de un mismo `act()`, tendríamos que repasar el código del hook, ya que cada vez que se llama la función `increment()`, el valor del `counter` se reinicia, es decir, no recibe el valor modificado en la llamada al anterior `increment()`.
+```javascript
+test('Debe incrementar el contador.', () => {
+    const { result } = renderHook( () => useCounter() );
+    const { increment} = result.current;
+
+    act( () => {
+        increment();
+        increment(2);
+    });
+
+    expect( result.current.counter ).toBe(13);
+});
+```
+
+El cambio en el hook sería el siguiente:  
+En lugar de hacer referencia a `counter`
+
+```javascript
+setCounter( counter + value);
+```
+
+Usaremos el valor `current`:
+```javascript
+setCounter( (current) => current + value );
+```
+
+De esta manera cada vez que se llame a `increment()`, parte del valor actual del counter.  
+
+
+```javascript
+
+test('Debe resetear el contador.', () => {
+    const { result } = renderHook( () => useCounter(5) );
+    const { increment, decrement, reset} = result.current;
+
+    act( () => {
+        // Variamos el valor inicial del contador
+        increment();
+        decrement();
+
+        // Reseteamos el valor para ver si funciona o no
+        reset();
+    });
+
+    expect( result.current.counter ).toBe(5);
+
+
+});
+```
+
+
+
+
 # ⭐⭐ 🚧 🪝 167. Pruebas sobre useCounter - CustomHook
 Para empezar a testear hooks, lo primero es importar `renderHook` de React Testing Library:
 ```javascript
@@ -227,6 +345,9 @@ describe('Pruebas en el UserCounter', () => {
         const { counter, increment, decrement, reset} = result.current;
 
         expect( counter ).toBe(10);
+
+        // (También se podría usar sin desestructurar "result.current":)
+        expect( result.current.counter ).toBe(10);
     });
 });
 ```
