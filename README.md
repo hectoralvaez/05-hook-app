@@ -167,6 +167,13 @@ throw new Error ('action.type "ABC" todavía no se ha definido');
 ---
 
 
+# 💩 🚧 🪝 169. Pruebas sobre useForm - CustomHook
+
+Clase bastante densa para testear cambios de valor (campo "name") en el formulario.
+
+---
+
+
 # ⭐ 🚧 🪝 168. Ejecutar funciones del customHook dentro de las pruebas
 
 Cuando necesitamos hacer un cambio de estado de React en un componente para testearlo, es necesario que este cambio de estado esté dentro de un `act()`.  
