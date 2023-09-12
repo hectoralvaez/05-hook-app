@@ -167,6 +167,51 @@ throw new Error ('action.type "ABC" todavía no se ha definido');
 ---
 
 
+# 🚧 🪝 170. Pruebas con múltiples hooks simultáneos
+
+Se podría hacer con un "screen shot" (snapshot), pero se va a hacer elemento por elemento.
+
+Usaremos `screen` (con screen.debug en el test, imprimimos la estructura completa de lo que estamos testeando, lo que permite ver cada elemento html) para analizar cada cada elemento por separado.
+
+Si intentas llamar a un elemento con `getByRole` y no pones el nombre correctamente: 
+
+```javascript
+const nextButton = screen.getByRole('button', {name: 'Nex Quote' });
+```
+
+La consola te lanza el siguiente error:
+
+```
+TestingLibraryElementError: Unable to find an accessible element with the role "button" and name "Nex Quote"
+
+Here are the accessible roles:
+
+heading:
+
+Name "Breaking Bad Quotes":
+<h1 />
+
+--------------------------------------------------
+separator:
+
+Name "":
+<hr />
+
+--------------------------------------------------
+button:
+
+Name "Next quote":
+<button
+class="btn btn-primary"
+disabled=""
+/>
+
+--------------------------------------------------
+```
+
+---
+
+
 # 💩 🚧 🪝 169. Pruebas sobre useForm - CustomHook
 
 Clase bastante densa para testear cambios de valor (campo "name") en el formulario.
