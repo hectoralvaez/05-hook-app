@@ -190,6 +190,95 @@ throw new Error ('action.type "ABC" todavía no se ha definido');
 ---
 
 
+# 🚧 🪝 173. Resolución de la tarea
+
+## "Debe eliminar un Todo"
+### ERROR EN ACTION:
+En realidad el payload SOLO devuelve el id:
+
+```javascript
+// 05-hook-app/src/hooks/useTodos.js
+
+const handleDeleteTodo = ( id ) => {
+    dispatch({
+        type: '[TODO] Delete Todo',
+        payload: id
+    });
+}
+```
+
+En el caso anterior, cuando hacíamos el test "Debe agregar un Todo" sí teníamos en el 'payload' todo el objeto 'todo':
+```javascript
+// 05-hook-app/src/hooks/useTodos.js
+
+const handleNewTodo = ( todo ) => {
+    const action = {
+        type: '[TODO] Add Todo',
+        payload: todo
+    }
+    dispatch( action );
+}
+```
+
+
+Por lo tanto, cuando probamos el "Debe eliminar un Todo", en lugar de plantear el action así:
+
+```javascript
+const action = {
+    type: "[TODO] Delete Todo",
+    payload: {
+        id: 1,
+    },
+};
+```
+
+Hay que plantearlo de la siguente manera:
+```javascript
+const action = {
+    type: "[TODO] Delete Todo",
+    payload:1,
+};
+```
+
+## "Debe realizar el toggle del Todo"
+### ERROR EN ACTION:
+
+(el mismo caso que en el anterior, solo se usa el ID, no el objeto entero)
+
+### ERROR EN EXPECT:
+Faltaba hacer referencia al elemento concreto del newState, al primer elemento del array:
+
+En lugar de:
+```javascript
+expect(newState.done).toBe(true);
+```
+Es:
+```javascript
+expect(newState[0].done).toBe(true);
+```
+
+Es lo mismo que hacer:
+```javascript
+expect(newState[0].done).toBeTruthy;
+```
+
+#### EXTRA:
+Para confirmar que el toggle funciona (no sería necesario, pero no está de más), a partir del 'newSate' que hemos generado en la prueba, volvemos a realizar el toggle para que quede de nuevo en false:
+
+```javascript
+const newState = todoReducer(initialState, action);
+expect(newState[0].done).toBe(true);
+
+const newState2 = todoReducer(newState, action);
+expect(newState2[0].done).toBe(false);
+```
+
+Es importante crear un nuevo state "newState2" y que se le aplique la acción a "newState" (el que hemos generado anteriormente) para comprobar en "newState2" que vuelve a ser FALSE.
+
+
+---
+
+
 # 🚧 🪝 172. Pruebas sobre el Reducer
 
 Probrar el 'Reducer' es importante ya que es quin cambia el estado.
