@@ -133,6 +133,25 @@ import 'whatwg-fetch'; // <-- yarn add whatwg-fetch
 yarn test
 ```
 
+Una vez en la consola, pulsando 'W', tenemos estas opciones:
+```
+› Press c to clear filters.
+› Press a to run all tests.
+› Press f to run only failed tests.
+› Press o to only run tests related to changed files.
+› Press p to filter by a filename regex pattern.
+› Press t to filter by a test name regex pattern.
+› Press q to quit watch mode.
+› Press Enter to trigger a test run.
+```
+
+### Para ejecutar los test de un solo component:
+
+Pulsamos 'p' y a continuación el nombre del component a testear:
+```
+todoReducer
+```
+
 
 ## Extra info Jest
 [expect()](https://jestjs.io/docs/expect)
@@ -167,6 +186,26 @@ Cuando estamos trabajando un código, pero todavía no se ha terminado, para evi
 ```javascript
 throw new Error ('action.type "ABC" todavía no se ha definido');
 ```
+
+---
+
+
+# 🚧 🪝 172. Pruebas sobre el Reducer
+
+Probrar el 'Reducer' es importante ya que es quin cambia el estado.
+
+Es muy sencillo de testear ya que, al ser una función pura, lo unico que hace es:
+- Recibir un estado inicial > Enviarle una acción > Confirmar que el nuevo estado es el correcto.
+
+> NOTA:
+> Como el reducer por defecto no hacía un 'return' el test daba error ya que esperaba el contenido con el que hemos definido el initial state, pero recibía "undefined"
+
+> ```
+> Expected: [{"description": "Demo Todo", "done": false, "id": 1}]
+> Received: undefined
+> ```
+
+Al pasar la función con el objeto del action vacío, no entra en el switch del `action.type` y devuelve el default, es decir, el `initialState`.
 
 ---
 
