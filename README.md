@@ -135,7 +135,11 @@ yarn test
 
 
 ## Extra info Jest
-[expect](https://jestjs.io/docs/expect)
+[expect()](https://jestjs.io/docs/expect)
+[mockFn.mockReturnValue(value)](https://jestjs.io/docs/mock-function-api#mockfnmockreturnvaluevalue)
+[expect().toHaveBeenCalled()](https://jestjs.io/docs/expect#tohavebeencalled)
+[beforeEach()](https://jestjs.io/docs/setup-teardown)
+[jest.clearAllMocks()](https://jestjs.io/docs/jest-object#jestclearallmocks)
 
 ### REACT TESTING LIBRARY (RTL):  
 
@@ -162,6 +166,118 @@ Cuando estamos trabajando un código, pero todavía no se ha terminado, para evi
 
 ```javascript
 throw new Error ('action.type "ABC" todavía no se ha definido');
+```
+
+---
+
+
+# 🚧 🪝 171. Evaluar respuesta del useFetch
+
+No se va a evaluar el funcionamiento de `useFetch`, ya se hizo en la sección pasada.
+
+Lo que se va a evaluar son los resultados del `useFetch`.
+
+En este caso `useFetch` está devolviendo la 'data', 'isLoading' y 'hasError' (05-hook-app/src/hooks/useFetch.js) 
+
+```javascript
+return {
+    data:       state.data,
+    isLoading:  state.isLoading,
+    hasError:   state.hasError,
+};
+```
+
+Haremos un "mock" completo del `useFetch` y simularemos los valores de retorno.
+
+>NOTA:
+>Para la importación del `useFetch` se recomiendo apuntar directamente a `useFetch` dentro del "barril" `hooks`.
+>
+>Si lo importamos así, 
+>```javascript
+>import { useFetch } from "../../src/hooks";
+>```
+>Tendríamos que hacer un mock del useCounter también, que se está usando en el "MultipleCustomHooks" y está dentro del "barril".
+>
+>Por lo tanto, hacemos la importación de este modo:
+>```javascript
+>import { useFetch } from "../../src/hooks/useFetch";
+>```
+>SPOILER ALERT: Acabaremos haciendo el mock del useCounter
+
+
+
+Una vez importado el hook, si hacemos el mock, 
+```javascript
+jest.mock('../../src/hooks/useFetch');
+```
+los tests darán error, porque el `useFetch` no se ha definido (undefined) por lo tanto, no hay nada que desestructurar.
+
+Hay que implementar el mock en los test simulando el valor de cada variable en cada caso.
+
+### Por defecto:
+```javascript
+useFetch.mockReturnValue({
+    data: null,
+    isLoading: true,
+    hasError: null
+});
+```
+### Mostrando un quote:
+```javascript
+useFetch.mockReturnValue({
+    data: [{author: 'Fernando', quote: 'Hola Mundo'}],
+    isLoading: false,
+    hasError: null
+});
+```
+
+Finalmente, hay que hacer el mock de `useCounter` para poder testear la función de incrementar del botón.
+
+Para simular el `mockReturnValue`, tenemos que tener claro qué devuelve la función que estamos evaluando, en este caso, el hook `useCounter` (05-hook-app/src/hooks/useCounter.js) devulelve:
+
+```javascript
+return {
+    counter,
+    increment,
+    decrement,
+    reset,
+}
+```
+
+Una vez tenemos claro el return de la función pasamos a simularla:
+
+```javascript
+    const mockIncrement = jest.fn();
+
+    useCounter.mockReturnValue({
+        counter: 1,
+        increment: mockIncrement
+    });
+```
+
+Si este mock lo llamamos solo dentro del test "Debe llamar la función de incrementar", nos dará error, ya que al hacer el mock del useCounter 
+```javascript
+jest.mock('../../src/hooks/useCounter');
+```
+
+en cada uno de los tests, se está usando el useCounter. 
+
+Entonces, en vez de llamar el useCounter en cada test, sacamos
+```javascript
+    const mockIncrement = jest.fn();
+
+    useCounter.mockReturnValue({
+        counter: 1,
+        increment: mockIncrement
+    });
+```
+del test específico "Debe llamar la función de incrementar" y lo ponemos antes de los 'test()', justo debajo del 'describe()' de manera que todos puedan acceder al mock del `useCounter`
+
+Si además, queremos asegurarnos de que en cada test la función se "resetea" a su estado inicial, añadimos:
+```javascript
+beforeEach( () => {
+    jest.clearAllMocks();
+});
 ```
 
 ---
