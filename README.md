@@ -189,6 +189,18 @@ throw new Error ('action.type "ABC" todavía no se ha definido');
 
 ---
 
+# 🚧 🪝 175. Pruebas en los eventos del TodoItem
+
+Al testear que el todo está completado, para no tener que volver a definir un nuevo "todo", con el "done" a TRUE, en el mismo test forzamos el valor:
+```javascript
+todo.done = true;
+```
+Una vez empecemos a trabajar con fixtures podremos tener diferentes todos con características específicas y podremos hacer referéncia a cada uno de ellos sin necesidad de forzar este valor en cada test.
+
+Es importante tener en cuenta que aquí no se está comprobando el funcionamiento del cambio de estado de cada item, eso ya se testeó en el reducer, aquí se está testeando el click de los elementos, NO el funcionamiento del todo, eso queda más arriba del TodoItem, se está analizando de la forma más atómica posible.
+
+---
+
 # 🚧 🪝 174. Pruebas en el componente TodoItem
 
 Definimos el 'todo':

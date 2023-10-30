@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { TodoItem } from "../../src/08-useReducer/TodoItem";
 
 describe("Pruebas en <TodoItem />  ", () => {
@@ -30,8 +30,61 @@ describe("Pruebas en <TodoItem />  ", () => {
         const spanElement = screen.getByLabelText('span');
         expect(spanElement.className).toBe("align-self-center ")
 
-        screen.debug();
+        // screen.debug();
+    });
 
+    test("Debe mostrar el Todo completado", () => {
+
+        todo.done = true;
+
+        render( 
+            <TodoItem 
+                todo={ todo }
+                onToggleTodo = { onToggleTodoMock }
+                onDeleteTodo = { onDeleteTodoMock }
+            />
+        );
+        
+        const spanElement = screen.getByLabelText('span');
+        expect(spanElement.className).toBe("align-self-center text-decoration-line-through");
+        
+        // screen.debug();
+    });
+
+    test("Span debe llamar el ToggleTodo cuando se hace click", () => {
+
+        render( 
+            <TodoItem 
+                todo={ todo }
+                onToggleTodo = { onToggleTodoMock }
+                onDeleteTodo = { onDeleteTodoMock }
+            />
+        );
+        
+        const spanElement = screen.getByLabelText('span');
+
+        fireEvent.click(spanElement);
+        expect( onToggleTodoMock ).toHaveBeenCalledWith( todo.id );
+        
+        // screen.debug();
+    });
+
+    test("Button debe llamar el onDeleteTodo", () => {
+
+        render( 
+            <TodoItem 
+                todo={ todo }
+                onToggleTodo = { onToggleTodoMock }
+                onDeleteTodo = { onDeleteTodoMock }
+            />
+        );
+        
+        const deleteButton = screen.getByLabelText('delete-button');
+
+        fireEvent.click(deleteButton);
+        expect( onDeleteTodoMock ).toHaveBeenCalledWith( todo.id );
+        
+        // screen.debug();
     });
 
 });
