@@ -189,6 +189,38 @@ throw new Error ('action.type "ABC" todavía no se ha definido');
 
 ---
 
+# 🚧 🪝 174. Pruebas en el componente TodoItem
+
+Definimos el 'todo':
+```javascript
+const todo = {
+    id: 1,
+    description: 'Piedra del Alma',
+    done: false
+}
+```
+
+> Próximamente se explicará cómo definir una sola vez un objeto (en este caso "todo") que podamos reutilizar en todos los tests del proyecto. 
+> Es lo que se conoce como "fixtures", data ficticia que se importa en cada prueba.
+
+y las funciones (con el nombre de la función original + "Mock" para indicar que es una función de test):
+```javascript
+const onDeleteTodoMock = jest.fn();
+const onToggleTodoMock = jest.fn();
+```
+
+antes de los tests, ya que se van a reutilizar en cada uno de los test.
+
+Precisamente por la reutilización de estas funciones, es necesario que hagamos el `clearAllMocks` después de cada ejecución para resetear las funciones:
+```javascript
+beforeEach( () => jest.clearAllMocks() );
+```
+
+En la aserción para confirmar que la class del span és correcta, creo que es mejor dejar el espacio para asegurarse de que NO se borra el espacio que hay detrás de la class, ya que si se quita, se juntan las clases y se pierden las dos clases.
+```javascript
+expect(spanElement.className).toBe("align-self-center ")
+```
+---
 
 # 🚧 🪝 173. Resolución de la tarea
 
