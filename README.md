@@ -189,6 +189,11 @@ throw new Error ('action.type "ABC" todavía no se ha definido');
 
 ---
 
+# 🚧 🪝 176. Pruebas en el TodoApp
+
+Si solo hacemos el render sin pasar valores, sin hacer el mock del hook useTodos, no sabemos si los valores que estamos pasando son correctos o no, ya que, aunque no da error, devuelve todo vacío.
+---
+
 # 🚧 🪝 175. Pruebas en los eventos del TodoItem
 
 Al testear que el todo está completado, para no tener que volver a definir un nuevo "todo", con el "done" a TRUE, en el mismo test forzamos el valor:
