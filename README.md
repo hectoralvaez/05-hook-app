@@ -189,9 +189,68 @@ throw new Error ('action.type "ABC" todavía no se ha definido');
 
 ---
 
+# 🚧 🪝 177. Pruebas con useContext
+
+No vamos a probar el `createContext`, ya que es una libreria de terceros (en este caso React) y damos por hecho que está testeada y funciona.
+
+Lo que vamos a comprobar es que `useContext` funciona como nosotros queremos dentro de nuestra aplicación.
+
+
+>GENERAL DE REACT PARA HACER REFERENCIA A UNA VARIABLE:
+>
+>Si definimos un usuario:
+>```javascript
+>const user = {
+>    id: 1,
+>    name: 'Fernando'
+>}
+>```
+>
+>Podemos referirnos a este usuario así:
+>
+>```javascript
+><UserContext.Provider value={{ user: user }}>
+>```
+>
+>o así: 
+>```javascript
+><UserContext.Provider value={{ user }}>
+>```
+
+SOLUCIÓN A LA TAREA:
+
+Así funcionaría, ya que comprueba que tanto el nombre como el id son correctos:
+```javascript
+expect( preTag.innerHTML).toContain('"name": "Fernando"');
+expect( preTag.innerHTML).toContain('"id": 1');
+```
+Pero es más limpio y elegante así:
+
+```javascript
+expect( preTag.innerHTML).toContain(user.id);
+expect( preTag.innerHTML).toContain(user.name);
+```
+
+De esta manera el id da error, ya que se pasa como 'string'.
+
+Se puede solucionar de dos maneras:
+
+1 - Pasándolo a string con 'toString()':
+```javascript
+expect( preTag.innerHTML).toContain(user.id.toString());
+```
+
+2 - Con un "Template string":
+```javascript
+expect( preTag.innerHTML).toContain( `${user.id}`);
+```
+
+---
+
 # 🚧 🪝 176. Pruebas en el TodoApp
 
 Si solo hacemos el render sin pasar valores, sin hacer el mock del hook useTodos, no sabemos si los valores que estamos pasando son correctos o no, ya que, aunque no da error, devuelve todo vacío.
+
 ---
 
 # 🚧 🪝 175. Pruebas en los eventos del TodoItem
