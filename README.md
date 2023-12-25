@@ -188,6 +188,18 @@ throw new Error ('action.type "ABC" todavía no se ha definido');
 ```
 
 ---
+# 🚧 🪝 179. Pruebas generales en nuestro AppRouter
+
+Para testear las rutas, es necesario llamar al componente a testear dentro del `<MemoryRouter>` que substituye a lo que se usa en el componente `<BrowserRouter>`
+
+Para pasar el valor de la ruta al `<MemoryRouter>`:
+```javascript
+<MemoryRouter initialEntries={['/about']}>
+    <MainApp />
+</MemoryRouter>
+```
+
+---
 
 # 🚧 🪝 178. Pruebas de funciones del context
 
