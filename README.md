@@ -187,6 +187,29 @@ Cuando estamos trabajando un código, pero todavía no se ha terminado, para evi
 throw new Error ('action.type "ABC" todavía no se ha definido');
 ```
 
+
+
+# 🧰 🪝 182. Temas puntuales de la sección
+
+## ¿Qué veremos en esta sección?
+
+- Subir código a nuestro repositorio
+
+- Tener un listado de customHooks y código que podemos reutilizar
+
+- Una idea para mantener tu repositorio ordenado con ejemplos
+
+No es una sección obligatoria, pero puede ayudarles a tener su código ordenado y fácil de utilizar en proyectos futuros.
+
+
+# 🆕 INICIO SECCIÓN 13: Bonus: Repositorio de Custom Hooks
+
+<br />
+
+---
+
+# 🏁 FIN SECCIÓN 12: Pruebas unitarias y de integración - Hooks
+
 ---
 # 🚧 🪝 179. Pruebas generales en nuestro AppRouter
 
