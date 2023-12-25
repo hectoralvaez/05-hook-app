@@ -189,6 +189,10 @@ throw new Error ('action.type "ABC" todavía no se ha definido');
 
 ---
 
+# 🚧 🪝 178. Pruebas de funciones del context
+
+---
+
 # 🚧 🪝 177. Pruebas con useContext
 
 No vamos a probar el `createContext`, ya que es una libreria de terceros (en este caso React) y damos por hecho que está testeada y funciona.
