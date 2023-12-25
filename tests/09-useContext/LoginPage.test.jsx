@@ -26,8 +26,10 @@ describe('Pruebas en <LoginPage />', () => {
      });
     test('Debe de llamar el setUser cuando se hace click en el botón', () => { 
 
+        const setUserMock = jest.fn();
+
         render(
-            <UserContext.Provider value={{ user }}>
+            <UserContext.Provider value={{ user: null, setUser: setUserMock }}>
                 <LoginPage />
             </UserContext.Provider>
         );
@@ -35,7 +37,7 @@ describe('Pruebas en <LoginPage />', () => {
         const btnSetUser = screen.getByLabelText('btn-set-user'); // aria-label
         fireEvent.click( btnSetUser );
 
-        expect(mockIncrement).toHaveBeenCalledWith( user );
+        expect(setUserMock).toHaveBeenCalledWith( user );
 
 
         
