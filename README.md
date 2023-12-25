@@ -191,6 +191,20 @@ throw new Error ('action.type "ABC" todavía no se ha definido');
 
 # 🚧 🪝 178. Pruebas de funciones del context
 
+## Importante:
+
+1. Definir el mock para poder hacer la acción del botón
+
+```javascript
+const setUserMock = jest.fn();
+```
+
+2. El UserContext, tiene dos valores, el inicial `user` y el final `setUser`, quando se aplica la acción (en este caso, hacer click en el botón)
+
+```javascript
+<UserContext.Provider value={{ user: null, setUser: setUserMock }}>
+```
+
 ---
 
 # 🚧 🪝 177. Pruebas con useContext
