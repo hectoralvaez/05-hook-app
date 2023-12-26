@@ -1,6 +1,7 @@
 URLS DEL PROYECTO:  
 Netlify: https://festivaldegifs.netlify.app  
 GitHub: https://github.com/hectoralvaez/festival-de-gifs  
+GitHub: https://github.com/hectoralvaez/custom-hooks
 GitHub Pages: https://hectoralvaez.github.io/festival-de-gifs/  
 
 React, Vite, GitHub, Jest, React Testing Library, Netlify, GitHub Pages, Postman
@@ -188,6 +189,11 @@ throw new Error ('action.type "ABC" todavía no se ha definido');
 ```
 
 
+
+# 🧰 🪝 183. Repositorio con customHooks
+https://github.com/hectoralvaez/custom-hooks
+
+---
 
 # 🧰 🪝 182. Temas puntuales de la sección
 
